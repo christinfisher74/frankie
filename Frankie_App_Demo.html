@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1E3329">
+<title>Frankie · Feminine Strength Co. · Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1E3329;--taupe:#C4A882;--olive:#7A9E7E;--cream:#FAF7F2;--cream-dark:#F0EBE3;--black:#1A1A1A;--dgray:#555555;--mgray:#999999;--lgray:#E8E4DF;--white:#FFFFFF;--warn:#C4763A;--warn-light:#FDF0E6;--success:#2D5016;--success-light:#EAF2EE;--slate:#3D5A80;--plum:#4A3D6B;--radius:12px;--radius-sm:8px;--shadow:0 2px 12px rgba(30,51,41,0.10)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#E8E4DF;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+.demo-banner{width:100%;background:var(--taupe);padding:10px 16px;text-align:center;font-size:12px;font-weight:600;color:var(--forest);letter-spacing:0.5px;position:sticky;top:0;z-index:999}
+.phone{width:100%;max-width:390px;min-height:100vh;background:var(--cream);display:flex;flex-direction:column}
+.header{background:var(--forest);padding:52px 20px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:32px;z-index:100}
+.header-brand{font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--taupe)}
+.header-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--cream);line-height:1}
+.nav{display:flex;background:var(--white);border-bottom:1px solid var(--lgray);overflow-x:auto;scrollbar-width:none;position:sticky;top:120px;z-index:99}
+.nav::-webkit-scrollbar{display:none}
+.nav-tab{flex:0 0 auto;padding:12px 18px;font-size:12px;font-weight:500;color:var(--mgray);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:all 0.2s;background:none;border-left:none;border-right:none;border-top:none}
+.nav-tab.active{color:var(--forest);border-bottom-color:var(--taupe);font-weight:600}
+.content{flex:1;padding:16px 16px 100px;display:flex;flex-direction:column;gap:14px}
+.tab{display:none;flex-direction:column;gap:14px}
+.tab.active{display:flex}
+.card{background:var(--white);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--forest);margin-bottom:2px}
+.card-sub{font-size:11px;color:var(--mgray);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:14px}
+.coach-note{background:var(--forest);border-radius:var(--radius);padding:16px;display:flex;gap:12px;align-items:flex-start}
+.coach-avatar{width:34px;height:34px;border-radius:50%;background:var(--taupe);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:var(--forest);flex-shrink:0}
+.coach-text{font-size:13px;color:var(--cream);line-height:1.6;font-style:italic}
+.coach-name{font-size:11px;color:var(--olive);letter-spacing:0.5px;margin-top:5px;font-style:normal}
+.energy-label{font-size:13px;color:var(--dgray);margin-bottom:8px}
+.energy-btns{display:flex;gap:6px}
+.energy-btn{flex:1;padding:10px 4px;border-radius:var(--radius-sm);border:1.5px solid var(--lgray);background:var(--cream);font-size:20px;cursor:pointer;transition:all 0.2s;text-align:center}
+.energy-btn.selected{border-color:var(--taupe);background:var(--cream-dark);transform:scale(1.08)}
+.checkin-grid{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.checkin-item{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--cream);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;border:1.5px solid transparent}
+.checkin-item.checked{background:var(--success-light);border-color:var(--olive)}
+.checkin-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--lgray);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;transition:all 0.2s;color:transparent}
+.checkin-item.checked .checkin-check{background:var(--olive);border-color:var(--olive);color:var(--white)}
+.checkin-label{font-size:14px;color:var(--black);flex:1;line-height:1.3}
+.checkin-item.checked .checkin-label{color:var(--success)}
+.stats-row{display:flex;gap:8px}
+.stat-pill{flex:1;padding:12px 8px;background:var(--cream);border-radius:var(--radius-sm);text-align:center}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--forest)}
+.stat-label{font-size:10px;color:var(--mgray);letter-spacing:0.5px;text-transform:uppercase}
+.save-btn{width:100%;padding:14px;background:var(--forest);color:var(--cream);border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:14px;transition:all 0.2s}
+.save-btn:active{transform:scale(0.98)}
+.day-card{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.day-header{padding:15px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.day-coached{background:var(--forest)}.day-pull{background:var(--slate)}.day-quad{background:var(--plum)}.day-push{background:#4A4A4A}
+.day-num{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:2px}
+.day-name{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--cream)}
+.day-focus{font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px}
+.day-arrow{color:rgba(255,255,255,0.5);font-size:16px;transition:transform 0.2s}
+.day-arrow.open{transform:rotate(180deg)}
+.day-body{background:var(--white);display:none}
+.day-body.open{display:block}
+.day-note{padding:12px 18px;background:var(--cream);font-size:12.5px;color:var(--dgray);line-height:1.5;font-style:italic;border-bottom:1px solid var(--lgray)}
+.ex-row{padding:13px 18px;border-bottom:1px solid var(--lgray)}
+.ex-row:last-child{border-bottom:none}
+.ex-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px}
+.ex-name{font-size:14px;font-weight:600;color:var(--black);flex:1;line-height:1.3}
+.ex-sets{font-size:11px;color:var(--forest);font-weight:600;background:var(--cream);padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.ex-cue{font-size:12px;color:var(--dgray);line-height:1.5}
+.search-link{font-size:11px;color:var(--taupe);background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;margin-top:4px;display:block}
+.finisher-row{padding:13px 18px;background:var(--cream-dark)}
+.finisher-title{font-size:13px;font-weight:600;color:var(--forest);margin-bottom:3px}
+.finisher-desc{font-size:12px;color:var(--dgray);line-height:1.4}
+.target-row{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--cream);border-radius:var(--radius-sm);margin-bottom:6px}
+.target-label{font-size:13.5px;color:var(--black)}
+.target-val{font-size:16px;font-weight:700;color:var(--forest)}
+.warn-box{padding:12px 14px;background:var(--warn-light);border-radius:var(--radius-sm);font-size:12.5px;color:var(--warn);line-height:1.5;margin-bottom:6px}
+.habit-row{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;background:var(--cream);border-radius:var(--radius-sm);cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;margin-bottom:6px}
+.habit-row.done{background:var(--success-light);border-color:var(--olive)}
+.habit-left{display:flex;flex-direction:column;gap:2px}
+.habit-name{font-size:13.5px;font-weight:500;color:var(--black)}
+.habit-detail{font-size:11.5px;color:var(--mgray)}
+.habit-row.done .habit-name{color:var(--success)}
+.habit-check{width:26px;height:26px;border-radius:50%;border:2px solid var(--lgray);display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all 0.2s;flex-shrink:0}
+.habit-row.done .habit-check{background:var(--olive);border-color:var(--olive);color:var(--white)}
+.meal-card{padding:13px 14px;background:var(--cream);border-radius:var(--radius-sm);margin-bottom:6px}
+.meal-name{font-size:13.5px;font-weight:600;color:var(--black);margin-bottom:2px}
+.meal-protein{font-size:11px;color:var(--forest);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px}
+.meal-desc{font-size:12px;color:var(--dgray);line-height:1.4}
+.meal-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;background:var(--cream-dark);color:var(--mgray);margin-top:4px}
+.phase-btn{width:100%;padding:12px 14px;background:var(--cream-dark);border:1.5px solid var(--lgray);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--dgray);cursor:pointer;text-align:left;transition:all 0.2s;margin-bottom:6px;display:block}
+.phase-btn.selected{border-color:var(--warn);background:var(--warn-light);color:var(--warn);font-weight:600}
+.phase-advice{padding:13px 14px;background:var(--warn-light);border-radius:var(--radius-sm);font-size:13px;color:var(--warn);line-height:1.6;display:none;margin-top:8px}
+.phase-advice.show{display:block}
+.hashi-grid{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hashi-btn{flex:1;min-width:80px;padding:10px 8px;background:var(--cream);border:1.5px solid var(--lgray);border-radius:var(--radius-sm);font-size:12px;color:var(--dgray);cursor:pointer;text-align:center;transition:all 0.2s}
+.hashi-btn.selected{background:var(--forest);border-color:var(--forest);color:var(--white)}
+.hashi-advice{font-size:12.5px;color:var(--dgray);line-height:1.5;margin-top:10px;padding:12px 14px;background:var(--cream);border-radius:var(--radius-sm);display:none}
+.hashi-advice.show{display:block}
+.tracker-item{padding:14px;background:var(--cream);border-radius:var(--radius-sm);margin-bottom:8px}
+.tracker-label{font-size:13.5px;font-weight:600;color:var(--black);margin-bottom:3px}
+.tracker-sub{font-size:12px;color:var(--mgray);line-height:1.4;margin-bottom:10px}
+.opt-row{display:flex;gap:6px;flex-wrap:wrap}
+.opt-btn{padding:8px 14px;border-radius:20px;border:1.5px solid var(--lgray);background:var(--white);font-size:12px;color:var(--dgray);cursor:pointer;transition:all 0.2s}
+.opt-btn.selected{background:var(--forest);border-color:var(--forest);color:var(--white)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:500;align-items:flex-end}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:var(--radius) var(--radius) 0 0;padding:22px 18px 40px;width:100%;max-height:80vh;overflow-y:auto}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--forest);margin-bottom:14px}
+.search-input{width:100%;padding:12px 14px;border:1.5px solid var(--lgray);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;color:var(--black);background:var(--cream);margin-bottom:14px}
+.search-input:focus{border-color:var(--taupe)}
+.search-result{padding:13px 14px;background:var(--cream);border-radius:var(--radius-sm);margin-bottom:8px}
+.sr-muscle{font-size:10px;color:var(--taupe);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:3px}
+.sr-name{font-size:14px;font-weight:600;color:var(--forest);margin-bottom:4px}
+.sr-desc{font-size:12.5px;color:var(--dgray);line-height:1.5}
+.modal-close{width:100%;padding:14px;background:var(--forest);color:var(--cream);border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--forest);color:var(--cream);padding:12px 24px;border-radius:30px;font-size:13px;font-weight:500;z-index:600;opacity:0;transition:opacity 0.3s;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1}
+.mobility-row{padding:11px 14px;background:var(--cream);border-radius:var(--radius-sm);font-size:13px;color:var(--black);display:flex;justify-content:space-between;margin-bottom:5px}
+.mobility-time{font-size:12px;color:var(--mgray)}
+</style>
+</head>
+<body>
+<div class="demo-banner">✨ PREVIEW — Frankie's Personal App by Feminine Strength Co.</div>
+<div class="phone">
+  <div class="header">
+    <div><div class="header-brand">Feminine Strength Co.</div><div class="header-name">Hey, Frankie 👋</div></div>
+    <div style="font-size:11px;color:var(--olive)">Preview</div>
+  </div>
+  <div class="nav">
+    <button class="nav-tab active" onclick="showTab('today',this)">Today</button>
+    <button class="nav-tab" onclick="showTab('training',this)">Training</button>
+    <button class="nav-tab" onclick="showTab('nutrition',this)">Nutrition</button>
+    <button class="nav-tab" onclick="showTab('cycle',this)">Cycle</button>
+    <button class="nav-tab" onclick="showTab('movement',this)">Movement</button>
+  </div>
+  <div class="content">
+
+    <!-- TODAY -->
+    <div class="tab active" id="tab-today">
+      <div class="coach-note"><div class="coach-avatar">C</div><div><div class="coach-text">Three months in and you are just getting started. Check in today — even the small things stack up.</div><div class="coach-name">— Christin</div></div></div>
+      <div class="card">
+        <div class="card-sub">Daily Check-in</div><div class="card-title">Today</div>
+        <div style="height:14px"></div>
+        <div class="energy-label">How is your energy today?</div>
+        <div class="energy-btns">
+          <button class="energy-btn" onclick="setEnergy(this)">😴</button>
+          <button class="energy-btn" onclick="setEnergy(this)">😐</button>
+          <button class="energy-btn selected" onclick="setEnergy(this)">🙂</button>
+          <button class="energy-btn" onclick="setEnergy(this)">💪</button>
+          <button class="energy-btn" onclick="setEnergy(this)">🔥</button>
+        </div>
+        <div class="checkin-grid">
+          <div class="checkin-item checked" onclick="toggle(this)"><div class="checkin-check">✓</div><div class="checkin-label">Meal 1 before coffee ☕</div></div>
+          <div class="checkin-item checked" onclick="toggle(this)"><div class="checkin-check">✓</div><div class="checkin-label">Pre or post workout meal hit</div></div>
+          <div class="checkin-item" onclick="toggle(this)"><div class="checkin-check">✓</div><div class="checkin-label">Protein with every meal 💪</div></div>
+          <div class="checkin-item" onclick="toggle(this)"><div class="checkin-check">✓</div><div class="checkin-label">Electrolytes + 64oz water 💧</div></div>
+          <div class="checkin-item checked" onclick="toggle(this)"><div class="checkin-check">✓</div><div class="checkin-label">Gluten free all day ✅</div></div>
+          <div class="checkin-item" onclick="toggle(this)"><div class="checkin-check">✓</div><div class="checkin-label">Moved my body today 🏋️</div></div>
+        </div>
+        <button class="save-btn" onclick="showToast('Saved! Great work today 💪')">Save Today</button>
+      </div>
+      <div class="card">
+        <div class="card-sub">This Month</div><div class="card-title">Your Consistency</div>
+        <div style="height:12px"></div>
+        <div class="stats-row">
+          <div class="stat-pill"><div class="stat-num">18</div><div class="stat-label">Days logged</div></div>
+          <div class="stat-pill"><div class="stat-num">83%</div><div class="stat-label">Habit score</div></div>
+          <div class="stat-pill"><div class="stat-num">12</div><div class="stat-label">Workouts</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRAINING -->
+    <div class="tab" id="tab-training">
+      <div class="coach-note"><div class="coach-avatar">C</div><div><div class="coach-text">RPE 7–8 on your working sets. If the last set feels easy — the weight needs to go up. Log your weights every session.</div><div class="coach-name">— Christin</div></div></div>
+      <div class="card"><div class="card-sub">Current Phase</div><div class="card-title">Phase 3 · Building Load</div><div style="height:6px"></div><div style="font-size:13px;color:var(--dgray);line-height:1.5">Same patterns you own — heavier weights, more upper body volume. Add weight every week when all reps are clean.</div></div>
+      <div class="day-card">
+        <div class="day-header day-coached" onclick="toggleDay('d1')"><div><div class="day-num">Day 1 · With Christin</div><div class="day-name">Coached Session</div><div class="day-focus">Lower Body · Glutes · Core</div></div><div class="day-arrow" id="arr-d1">▼</div></div>
+        <div class="day-body" id="body-d1">
+          <div class="day-note">Your coached day. Christin leads everything. Focus on form, feel every rep, trust the cues.</div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">KAS Glute Bridge (barbell)</div><div class="ex-sets">4 × 10–12</div></div><div class="ex-cue">Small pelvic tilt at the top. Squeeze and hold. Isolates the glute max differently from a standard hip thrust.</div><button class="search-link" onclick="openSearch('KAS Glute Bridge')">What does this look like? →</button></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Elevated RDL (deficit plates)</div><div class="ex-sets">4 × 8–10</div></div><div class="ex-cue">Standing on plates increases your range of motion. Deeper hamstring stretch. Push hips back, feel the stretch, drive through.</div></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">KB Dead Stop Split Squat</div><div class="ex-sets">3 × 8 each</div></div><div class="ex-cue">KB touches floor at the bottom — dead pause — then drive up from nothing. No momentum. Front glute does all the work.</div><button class="search-link" onclick="openSearch('Split Squat')">What does this look like? →</button></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Single Leg RDL + Cable Kickback</div><div class="ex-sets">3 × each</div></div><div class="ex-cue">Single leg RDL: hold weight in opposite hand, hinge forward, feel hamstring stretch. Kickback: ankle strap, kick back and hold 1 second.</div></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Pallof Press + Copenhagen Plank</div><div class="ex-sets">3 × each</div></div><div class="ex-cue">Core finisher. Pallof: press cable out and hold 2 seconds. Copenhagen: side plank with top foot on bench. Hip stability and inner thigh.</div></div>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header day-pull" onclick="toggleDay('d2')"><div><div class="day-num">Day 2 · Solo</div><div class="day-name">Upper Body Pull</div><div class="day-focus">Back · Rear Delts · Biceps</div></div><div class="day-arrow" id="arr-d2">▼</div></div>
+        <div class="day-body" id="body-d2">
+          <div class="day-note">Back definition day. Every exercise here creates the strong defined look across your back and shoulders.</div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Wide Grip Lat Pulldown</div><div class="ex-sets">4 × 10–12</div></div><div class="ex-cue">Wide overhand grip. Creates the V-shape width in your back. Pull to collarbone, lean back slightly, squeeze hard.</div><button class="search-link" onclick="openSearch('Lat Pulldown')">What does this look like? →</button></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Single Arm Cable Row</div><div class="ex-sets">4 × 10–12 each</div></div><div class="ex-cue">Low pulley. Each side independently — no dominant side cheating. Drive elbow back and up, hold 1 second at top.</div></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Cable Rear Delt Fly + Face Pull</div><div class="ex-sets">3 × each</div></div><div class="ex-cue">Rear delt fly: both arms wide arc. Face pull: elbows high and wide, hold 1 second. Joint health — never skip this.</div></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">EZ Bar Curl</div><div class="ex-sets">3 × 10–12</div></div><div class="ex-cue">Full range of motion. Control the lowering over 2 counts — that is where the muscle builds.</div></div>
+          <div class="finisher-row"><div class="finisher-title">🚣 Finisher Circuit · 3 rounds</div><div class="finisher-desc">Row 1 min → KB Swings 45s → Med Ball Slam 45s. Rest 90s between rounds. Effort 7/10.</div></div>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header day-quad" onclick="toggleDay('d3')"><div><div class="day-num">Day 3 · Solo</div><div class="day-name">Lower Body — Quads</div><div class="day-focus">Quads · Inner Thigh · No glute overlap</div></div><div class="day-arrow" id="arr-d3">▼</div></div>
+        <div class="day-body" id="body-d3">
+          <div class="day-note">QUAD day — not glute day. You can do this back to back with your coached session because the muscles are completely different.</div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Landmine Goblet Squat (heels elevated)</div><div class="ex-sets">4 × 10–12</div></div><div class="ex-cue">Heels on plates, hold end of landmine bar at chest. Squat straight down keeping chest tall. Pure quad focus.</div><button class="search-link" onclick="openSearch('Landmine Goblet Squat')">What does this look like? →</button></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Leg Press (mid foot, quad focus)</div><div class="ex-sets">4 × 10–12</div></div><div class="ex-cue">Mid plate — NOT high and wide. That is glutes. Mid plate is quad focus. Control down slowly.</div></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Walking Lunge + Leg Extension</div><div class="ex-sets">3 × each</div></div><div class="ex-cue">Lunges: stay upright for quad focus. Extension: extend fully, hold 1 second, lower over 3 counts.</div></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Barbell Spanish Squat</div><div class="ex-sets">3 × 10–12</div></div><div class="ex-cue">Bar at shin height on safety pins. Press calves into bar, squat with completely upright torso. Pure quad — your quads do everything.</div><button class="search-link" onclick="openSearch('Spanish Squat')">What does this look like? →</button></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Lateral Lunge + Cable Adduction</div><div class="ex-sets">3 × each</div></div><div class="ex-cue">Inner thigh and quad together. Cable adduction with ankle strap — hold 1 second at full contraction.</div></div>
+          <div class="finisher-row"><div class="finisher-title">🚶 Cardio Finish</div><div class="finisher-desc">15–20 min incline treadmill walk. Quads done, glutes fresh. Fat burning without taxing recovery.</div></div>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header day-push" onclick="toggleDay('d4')"><div><div class="day-num">Day 4 · Solo</div><div class="day-name">Upper Body Push</div><div class="day-focus">Chest · Shoulders · Triceps</div></div><div class="day-arrow" id="arr-d4">▼</div></div>
+        <div class="day-body" id="body-d4">
+          <div class="day-note">Strong defined arms come from training them twice a week. RPE 7–8 on all working sets.</div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Incline DB Press + Cable Fly (superset)</div><div class="ex-sets">3 × each</div></div><div class="ex-cue">Incline: lower slowly over 2 counts. Cable fly: wide arc, feel the stretch across chest. Two angles on the same muscle.</div></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Arnold Press + Cable Lateral Raise (superset)</div><div class="ex-sets">3 × each</div></div><div class="ex-cue">Arnold: rotate palms as you press. Lateral raise: raise to shoulder height, hold 1 second, do not shrug.</div></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Tricep Dip + Overhead Extension (superset)</div><div class="ex-sets">3 × each</div></div><div class="ex-cue">Dips hit all three heads. Overhead extension stretches the long head. Most complete tricep development available.</div></div>
+          <div class="ex-row"><div class="ex-top"><div class="ex-name">Dead Bug + Pallof Press (core finisher)</div><div class="ex-sets">3 × each</div></div><div class="ex-cue">Dead bug: lower back into floor. Pallof: press cable out and hold 2 seconds. Core stability — not crunches.</div></div>
+          <div class="finisher-row"><div class="finisher-title">🚣 Cardio Finish</div><div class="finisher-desc">10 min rowing machine. Chest done — rowing is mostly back and legs. Clean finish.</div></div>
+        </div>
+      </div>
+      <button class="save-btn" onclick="openSearch('')">🔍 Search Any Exercise</button>
+    </div>
+
+    <!-- NUTRITION -->
+    <div class="tab" id="tab-nutrition">
+      <div class="coach-note"><div class="coach-avatar">C</div><div><div class="coach-text">Your training is locked in. Nutrition is your next big lever. You do not have to track every gram — just check in daily. The consistency score tells the story.</div><div class="coach-name">— Christin</div></div></div>
+      <div class="card">
+        <div class="card-sub">Your Daily Targets</div><div class="card-title">Nutrition Anchors</div>
+        <div style="height:12px"></div>
+        <div class="target-row"><div class="target-label">Daily protein target</div><div class="target-val">135g</div></div>
+        <div class="target-row"><div class="target-label">Per meal target</div><div class="target-val">30–35g</div></div>
+        <div class="target-row"><div class="target-label">Daily calories</div><div class="target-val">1,650</div></div>
+        <div class="warn-box" style="margin-top:8px">☕ Coffee after Meal 1 only — never on an empty stomach. Caffeine suppresses hunger and you already eat small meals.</div>
+        <div style="padding:11px 14px;background:var(--cream);border-radius:var(--radius-sm);font-size:13px;color:var(--dgray);line-height:1.5">🚫 Never eat a carb alone — always pair with protein or fat.</div>
+      </div>
+      <div class="card">
+        <div class="card-sub">Today's Habits</div><div class="card-title">How did you eat today?</div>
+        <div style="height:12px"></div>
+        <div class="habit-row done" onclick="toggleHabit(this)"><div class="habit-left"><div class="habit-name">Ate Meal 1 before coffee</div><div class="habit-detail">Eggs, Greek yogurt, or 30g protein</div></div><div class="habit-check">✓</div></div>
+        <div class="habit-row done" onclick="toggleHabit(this)"><div class="habit-left"><div class="habit-name">Lunch had 30g+ protein</div><div class="habit-detail">Factor meal, Clean Plates, or home cooked</div></div><div class="habit-check">✓</div></div>
+        <div class="habit-row" onclick="toggleHabit(this)"><div class="habit-left"><div class="habit-name">Pre-workout meal 90 min before</div><div class="habit-detail">Protein + carb paired — never carbs alone</div></div><div class="habit-check">✓</div></div>
+        <div class="habit-row" onclick="toggleHabit(this)"><div class="habit-left"><div class="habit-name">Post-workout meal within 2 hrs</div><div class="habit-detail">Most important window — do not skip</div></div><div class="habit-check">✓</div></div>
+        <div class="habit-row" onclick="toggleHabit(this)"><div class="habit-left"><div class="habit-name">Bedtime protein snack</div><div class="habit-detail">Cottage cheese, casein shake, or Greek yogurt</div></div><div class="habit-check">✓</div></div>
+        <div class="habit-row done" onclick="toggleHabit(this)"><div class="habit-left"><div class="habit-name">No carbs eaten alone today</div><div class="habit-detail">Every carb paired with protein or fat</div></div><div class="habit-check">✓</div></div>
+        <button class="save-btn" onclick="showToast('Nutrition saved! 🥗')">Save Nutrition Check-in</button>
+      </div>
+      <div class="card">
+        <div class="card-sub">Meal Ideas</div><div class="card-title">Gluten Free · High Protein</div>
+        <div style="height:12px"></div>
+        <div class="meal-card"><div class="meal-name">Greek Yogurt + Berries + Chia</div><div class="meal-protein">~22–27g protein</div><div class="meal-desc">1 cup plain Greek yogurt, raspberries, 1 tbsp chia seeds. Zero prep. Great breakfast or bedtime snack.</div><span class="meal-tag">Breakfast · Bedtime</span></div>
+        <div class="meal-card"><div class="meal-name">Factor Meal + Greek Yogurt</div><div class="meal-protein">~33–40g protein</div><div class="meal-desc">Choose Factor meals with 30g+ protein. Add Greek yogurt on the side. Zero cooking. Best lunch option.</div><span class="meal-tag">Lunch · Easy Day</span></div>
+        <div class="meal-card"><div class="meal-name">Chicken + Rice + Veg</div><div class="meal-protein">~38g protein</div><div class="meal-desc">4oz grilled chicken, 1/2 cup white rice, any vegetable. Batch cook Sunday. Best post-workout meal.</div><span class="meal-tag">Post-Workout · Dinner</span></div>
+        <div class="meal-card"><div class="meal-name">Cottage Cheese + Fruit</div><div class="meal-protein">~27g protein</div><div class="meal-desc">High casein — slow-digesting overnight. Best bedtime snack for overnight muscle recovery.</div><span class="meal-tag">Bedtime</span></div>
+        <div class="meal-card"><div class="meal-name">Ground Turkey Bowl</div><div class="meal-protein">~35g protein</div><div class="meal-desc">4oz 93% lean ground turkey, 1/2 cup rice, avocado, salsa. Easy to batch. Anti-inflammatory and filling.</div><span class="meal-tag">Lunch · Dinner</span></div>
+      </div>
+    </div>
+
+    <!-- CYCLE -->
+    <div class="tab" id="tab-cycle">
+      <div class="coach-note"><div class="coach-avatar">C</div><div><div class="coach-text">Your cycle affects everything — energy, weight, appetite, recovery. Track it here so we can work with your body instead of against it. Scale fluctuations during your period are water — not fat. Always.</div><div class="coach-name">— Christin</div></div></div>
+      <div class="card">
+        <div class="card-sub">Cycle Tracking</div><div class="card-title">Where are you today?</div>
+        <div style="height:12px"></div>
+        <button class="phase-btn" onclick="selectPhase(this,'menstrual')">🔴 Period (Days 1–5)</button>
+        <button class="phase-btn" onclick="selectPhase(this,'follicular')">🌱 Follicular (Days 6–13)</button>
+        <button class="phase-btn" onclick="selectPhase(this,'ovulation')">⚡ Ovulation (Days 14–16)</button>
+        <button class="phase-btn" onclick="selectPhase(this,'luteal')">🌙 Luteal (Days 17–28)</button>
+        <div class="phase-advice" id="phase-advice"></div>
+        <button class="save-btn" onclick="showToast('Cycle log saved 🌙')">Save Cycle Log</button>
+      </div>
+      <div class="card">
+        <div class="card-sub">During Your Period</div><div class="card-title">What to do differently</div>
+        <div style="height:10px"></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="padding:12px 14px;background:var(--cream);border-radius:var(--radius-sm)"><div style="font-size:13px;font-weight:600;margin-bottom:3px">🍽️ Eat more</div><div style="font-size:12px;color:var(--dgray);line-height:1.5">Increase calories by 150–250 on days 1–3. Your body needs more energy. Add an extra snack. Do not restrict.</div></div>
+          <div style="padding:12px 14px;background:var(--cream);border-radius:var(--radius-sm)"><div style="font-size:13px;font-weight:600;margin-bottom:3px">⚖️ Ignore the scale</div><div style="font-size:12px;color:var(--dgray);line-height:1.5">Water retention during your cycle adds 1–5 lbs. This is hormonal — not fat. The scale is lying.</div></div>
+          <div style="padding:12px 14px;background:var(--cream);border-radius:var(--radius-sm)"><div style="font-size:13px;font-weight:600;margin-bottom:3px">🏋️ Adjust training</div><div style="font-size:12px;color:var(--dgray);line-height:1.5">Heavy days 1–2: reduce load 20–30%, keep the movement. Mobility day is always a yes.</div></div>
+          <div style="padding:12px 14px;background:var(--cream);border-radius:var(--radius-sm)"><div style="font-size:13px;font-weight:600;margin-bottom:3px">💊 Hashimoto's note</div><div style="font-size:12px;color:var(--dgray);line-height:1.5">Hormonal fluctuations can trigger flares. If fatigue is severe — mobility only, extra protein, extra rest. This is smart, not failure.</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-sub">Hashimoto's Log</div><div class="card-title">How is your thyroid today?</div>
+        <div style="height:10px"></div>
+        <div class="hashi-grid">
+          <button class="hashi-btn" onclick="selectHashi(this,'great')">Feeling great</button>
+          <button class="hashi-btn" onclick="selectHashi(this,'okay')">Okay</button>
+          <button class="hashi-btn" onclick="selectHashi(this,'tired')">Fatigued</button>
+          <button class="hashi-btn" onclick="selectHashi(this,'flare')">Flare day</button>
+        </div>
+        <div class="hashi-advice" id="hashi-advice"></div>
+        <button class="save-btn" onclick="showToast('Logged. Take care of yourself today 💙')">Save Log</button>
+      </div>
+    </div>
+
+    <!-- MOVEMENT -->
+    <div class="tab" id="tab-movement">
+      <div class="coach-note"><div class="coach-avatar">C</div><div><div class="coach-text">Your hip stability and pelvic floor work matters as much as your heavy lifts. Track it here. Consistency on the small stuff is what makes the big stuff better.</div><div class="coach-name">— Christin</div></div></div>
+      <div class="card">
+        <div class="card-sub">Hip Stability</div><div class="card-title">Did you do your hip work?</div>
+        <div style="height:12px"></div>
+        <div class="tracker-item"><div class="tracker-label">Clamshell · 15–20 each side</div><div class="tracker-sub">After every lower body session. Directly addresses the hip popping. Pelvis stays completely still.</div><div class="opt-row"><button class="opt-btn" onclick="selectOpt(this)">✓ Done</button><button class="opt-btn" onclick="selectOpt(this)">Skipped</button></div></div>
+        <div class="tracker-item"><div class="tracker-label">Hip Flexor March · 10 each leg</div><div class="tracker-sub">Drive knee up, hold 2 seconds. Strengthens the hip flexor that causes the snapping sensation.</div><div class="opt-row"><button class="opt-btn" onclick="selectOpt(this)">✓ Done</button><button class="opt-btn" onclick="selectOpt(this)">Skipped</button></div></div>
+        <div class="tracker-item"><div class="tracker-label">Hip Popping Today?</div><div class="tracker-sub">Track frequency so we can see the stability work reducing it over time.</div><div class="opt-row"><button class="opt-btn" onclick="selectOpt(this)">None 🎉</button><button class="opt-btn" onclick="selectOpt(this)">A little</button><button class="opt-btn" onclick="selectOpt(this)">Quite a bit</button></div></div>
+      </div>
+      <div class="card">
+        <div class="card-sub">Movement Quality</div><div class="card-title">Pelvic Floor + Foot Mechanics</div>
+        <div style="height:12px"></div>
+        <div class="tracker-item"><div class="tracker-label">Heel connection during squats</div><div class="tracker-sub">Were your heels staying down? Toes coming up = tight calves. Cue: push the floor away through your heels.</div><div class="opt-row"><button class="opt-btn" onclick="selectOpt(this)">Heels down ✓</button><button class="opt-btn" onclick="selectOpt(this)">Sometimes up</button><button class="opt-btn" onclick="selectOpt(this)">Toes coming up</button></div></div>
+        <div class="tracker-item"><div class="tracker-label">Pelvic floor awareness</div><div class="tracker-sub">Any symptoms during exercise today? No shame — just data for Christin.</div><div class="opt-row"><button class="opt-btn" onclick="selectOpt(this)">None</button><button class="opt-btn" onclick="selectOpt(this)">Mild</button><button class="opt-btn" onclick="selectOpt(this)">Notable</button></div></div>
+        <button class="save-btn" onclick="showToast('Movement log saved 🦵')">Save Movement Log</button>
+      </div>
+      <div class="card">
+        <div class="card-sub">Recovery Day</div><div class="card-title">Mobility Flow · 20–25 min</div>
+        <div style="height:10px"></div>
+        <div style="font-size:13px;color:var(--dgray);line-height:1.5;margin-bottom:12px">On flare days, period days, or any day your body says no — do this. Always a yes.</div>
+        <div class="mobility-row"><span>90/90 Hip Stretch</span><span class="mobility-time">90s each side</span></div>
+        <div class="mobility-row"><span>Cat-Cow</span><span class="mobility-time">10 slow breaths</span></div>
+        <div class="mobility-row"><span>Thoracic Rotation</span><span class="mobility-time">8 each side</span></div>
+        <div class="mobility-row"><span>Glute Bridge (3s hold)</span><span class="mobility-time">10 reps</span></div>
+        <div class="mobility-row"><span>Pigeon Pose</span><span class="mobility-time">90s each side</span></div>
+        <div class="mobility-row"><span>Box Breathing</span><span class="mobility-time">5 minutes</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SEARCH MODAL -->
+<div class="modal-overlay" id="searchModal" onclick="closeOnOverlay(event)">
+  <div class="modal">
+    <div class="modal-title">Exercise Search</div>
+    <input class="search-input" id="searchInput" type="text" placeholder="Search any exercise..." oninput="runSearch(this.value)" autocomplete="off">
+    <div id="searchResults"></div>
+    <button class="modal-close" onclick="closeSearch()">Close</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const exercises=[{name:'KAS Glute Bridge',muscle:'Glutes',desc:'Small pelvic tilt at top — not full hip extension. Squeeze and hold. Isolates the glute max differently from a hip thrust. Bar stays relatively low throughout the movement.'},{name:'Barbell Hip Thrust',muscle:'Glutes',desc:'Upper back on bench edge, bar pad across hips. Drive through heels, squeeze glutes hard at top, chin tucked. Feel it in glutes — not lower back. Hold 2 seconds at top.'},{name:'Elevated RDL',muscle:'Hamstrings · Glutes',desc:'Stand on weight plates for increased range of motion. Deeper hamstring stretch than standard RDL. Push hips back, feel the longer stretch at the bottom, drive through heels to stand.'},{name:'KB Dead Stop Split Squat',muscle:'Quads · Glutes',desc:'Rear foot elevated. KB touches the floor at the bottom of every rep — full dead stop, no momentum. Drive up from nothing. Front glute does all the work. Much harder than a standard split squat.'},{name:'Single Leg RDL',muscle:'Hamstrings · Glutes',desc:'Hold weight in opposite hand from standing leg. Hinge forward keeping back flat, feel hamstring stretch, drive through standing heel to return. Use wall for light support while learning balance.'},{name:'Cable Kickback',muscle:'Glutes',desc:'Ankle strap, face the cable machine. Hinge slightly at hips. Kick straight back squeezing glute hard at top. Hold 1 second. Feel glute — not lower back. Neutral spine throughout.'},{name:'Landmine Goblet Squat',muscle:'Quads',desc:'Anchor bar in landmine attachment. Hold end of bar at chest like a goblet squat. Heels elevated on weight plates. Squat straight down keeping chest completely tall. Pure quad focus.'},{name:'Barbell Spanish Squat',muscle:'Quads',desc:'Set bar on safety pins at shin height. Press calves firmly into bar. Squat straight down with upright torso — the bar is your anchor. Your quads do all the work. One of the most direct quad exercises available.'},{name:'Walking Lunge',muscle:'Quads · Glutes',desc:'Step forward, lower back knee toward floor, drive through front heel and step into the next rep. Keep torso upright for quad focus — forward lean shifts load to glutes.'},{name:'Leg Extension',muscle:'Quads',desc:'Extend fully, hold 1 second at top. Lower slowly over 2–3 counts — the eccentric builds the most muscle. Adjust machine so pad sits just above ankle.'},{name:'Leg Press',muscle:'Quads · Glutes',desc:'Foot position determines focus. Mid plate shoulder width = quad focus. High and wide = glute focus. Control the weight down slowly. Do not lock knees at the top.'},{name:'Lateral Lunge',muscle:'Inner Thigh · Quads',desc:'Step wide to the side. Sit into the bent leg, keep other leg straight. Drive through bent heel to return. Hits inner thigh and quad in the side-to-side plane.'},{name:'Cable Adduction',muscle:'Inner Thigh',desc:'Ankle strap at floor level. Stand sideways to cable machine. Pull leg across body against resistance. Hold 1 second at full contraction. Inner thigh isolation.'},{name:'Wide Grip Lat Pulldown',muscle:'Upper Lats',desc:'Wide overhand grip. Pull to collarbone, lean back slightly. Feel it in the sides of your back — not your arms. Creates V-shape width. Control the bar back up slowly.'},{name:'Single Arm Cable Row',muscle:'Mid Back',desc:'Low pulley, neutral grip handle. Each side works independently. Drive elbow back and up, hold 1 second at top, lower slowly.'},{name:'Face Pull',muscle:'Rear Delts · Rotator Cuff',desc:'Cable at face height, rope attachment. Pull rope to face, elbows high and wide, hold 1 second. Rear delts and rotator cuff joint health — never skip this exercise.'},{name:'Cable Rear Delt Fly',muscle:'Rear Delts',desc:'Cables at shoulder height. Arms wide, slight bend in elbows. Pull back in wide arc, hold 1 second, return slowly. Feel the back of your shoulders — not your traps.'},{name:'EZ Bar Curl',muscle:'Biceps',desc:'Angled grip reduces wrist strain. Full range of motion, both arms together. Control the lowering over 2 counts. Builds peak bicep strength.'},{name:'Arnold Press',muscle:'Shoulders',desc:'Start with palms facing you at shoulder height. Rotate palms away as you press overhead. Reverse on the way down. Adds front delt involvement beyond standard shoulder press.'},{name:'Cable Lateral Raise',muscle:'Side Delts',desc:'Reach across body for handle from low pulley. Raise arm to shoulder height, hold 1 second, lower slowly. Cable keeps tension at the bottom where dumbbells go slack. Do not shrug.'},{name:'Tricep Dip',muscle:'Triceps',desc:'Assisted machine. Body upright = tricep focus. Lower until elbows reach 90°. Drive back up. All three heads of the tricep. Reduce assistance over time.'},{name:'Overhead Tricep Extension',muscle:'Triceps · Long Head',desc:'Arms overhead, elbows pointing forward. Lower weight behind head, extend back up. Stretches the long head — the biggest part of the tricep.'},{name:'Incline DB Chest Press',muscle:'Chest · Front Delts',desc:'Bench at 30–45 degrees. Elbows at 45° from body. Lower slowly over 2 counts. More muscle recruited than machine because free weight requires stability.'},{name:'Cable Chest Fly',muscle:'Chest',desc:'Cables at chest height. Wide arc bringing hands together in front of chest. Slight bend in elbows throughout. Feel the stretch at the widest point.'},{name:'Pallof Press',muscle:'Core · Anti-Rotation',desc:'Cable at chest height. Stand sideways. Press straight out and hold 2 seconds. Your core resists the cable pulling you sideways. Real functional core stability.'},{name:'Copenhagen Plank',muscle:'Inner Thigh · Core',desc:'Side plank with top foot on bench. Body in straight line. Inner thigh holds you up. One of the best inner thigh and hip stability exercises available. Start with 15 seconds.'},{name:'Dead Bug',muscle:'Core',desc:'Lie on back, arms straight up, knees at 90°. Lower back PRESSED INTO FLOOR — non-negotiable. Extend opposite arm and leg. Exhale as you extend. Reduce range if lower back lifts.'},{name:'Clamshell',muscle:'Hip External Rotators',desc:'Lie on side, feet stacked. Rotate top knee open like a clamshell. Pelvis stays completely still — only your hip moves. Hold 1 second at top. Feel outer glute.'},{name:'Hip Flexor March',muscle:'Hip Flexors',desc:'Stand tall, drive knee up to hip height, hold 2 seconds at top, lower slowly. Hold wall for balance if needed. Directly strengthens the hip flexor that causes snapping.'},{name:'Kettlebell Swing',muscle:'Glutes · Hamstrings',desc:'HINGE not squat. Push hips back, hike KB between legs, snap hips forward. Squeeze glutes hard at top. Arms are just a pendulum — all power comes from your hips.'}];
+
+function showTab(id,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active')}
+function toggle(el){el.classList.toggle('checked')}
+function toggleHabit(el){el.classList.toggle('done')}
+function setEnergy(btn){document.querySelectorAll('.energy-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected')}
+function toggleDay(id){const body=document.getElementById('body-'+id);const arr=document.getElementById('arr-'+id);const open=body.classList.contains('open');body.classList.toggle('open',!open);arr.classList.toggle('open',!open)}
+function selectOpt(btn){const row=btn.closest('.opt-row');row.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected')}
+const phaseAdvice={menstrual:'🔴 Period days. Increase calories 150–250 today. Scale will be up from water retention — ignore it completely. Reduce training load if needed. Your body is working hard — feed it.',follicular:'🌱 Energy is rising. Great time to push your weights. Your body recovers faster during this phase and strength tends to peak. Take advantage of how good you feel.',ovulation:'⚡ Peak strength window for most women. Great time to go for personal bests on your main lifts. You may feel more motivated — use it.',luteal:'🌙 Energy may dip toward the end of this phase. Carb cravings are normal and hormonal — add a complex carb snack rather than fighting it. Magnesium-rich foods help.'};
+const hashinotoAdvice={great:'Great energy day. Train normally and push your working weights.',okay:'Okay day. Train normally but listen to your body. If something feels off mid-session, reduce load rather than pushing through.',tired:'Fatigued day. Consider reducing volume 30% — keep the movement, reduce the demand. Mobility day is always an option.',flare:'Flare day. Mobility only today. Extra protein, extra rest, extra water. This is managing a chronic condition intelligently — not failure.'};
+function selectPhase(btn,phase){document.querySelectorAll('.phase-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const el=document.getElementById('phase-advice');el.textContent=phaseAdvice[phase];el.classList.add('show')}
+function selectHashi(btn,status){document.querySelectorAll('.hashi-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const el=document.getElementById('hashi-advice');el.textContent=hashinotoAdvice[status];el.classList.add('show')}
+function openSearch(q){document.getElementById('searchModal').classList.add('open');document.getElementById('searchInput').value=q;runSearch(q);setTimeout(()=>document.getElementById('searchInput').focus(),100)}
+function closeSearch(){document.getElementById('searchModal').classList.remove('open')}
+function closeOnOverlay(e){if(e.target===document.getElementById('searchModal'))closeSearch()}
+function runSearch(q){const query=q.toLowerCase().trim();const results=query.length<1?exercises:exercises.filter(e=>e.name.toLowerCase().includes(query)||e.muscle.toLowerCase().includes(query)||e.desc.toLowerCase().includes(query));document.getElementById('searchResults').innerHTML=results.slice(0,8).map(e=>`<div class="search-result"><div class="sr-muscle">${e.muscle}</div><div class="sr-name">${e.name}</div><div class="sr-desc">${e.desc}</div></div>`).join('')||'<div style="font-size:13px;color:var(--mgray);padding:8px 0">No results. Try a different search term.</div>'}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+</script>
+</body>
+</html>
