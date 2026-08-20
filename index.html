@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1E3329">
+<title>Feminine Strength Co. · Client Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1E3329;--taupe:#C4A882;--olive:#7A9E7E;--cream:#FAF7F2;--cdark:#F0EBE3;--black:#1A1A1A;--dgray:#555555;--mgray:#999999;--lgray:#E8E4DF;--white:#fff;--warn:#C4763A;--warnl:#FDF0E6;--success:#2D5016;--successl:#EAF2EE;--slate:#3D5A80;--plum:#4A3D6B;--r:12px;--rs:8px;--sh:0 2px 12px rgba(30,51,41,0.10)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--black);min-height:100vh;max-width:430px;margin:0 auto}
+.view-toggle{display:flex;background:var(--forest);padding:8px 16px 0;position:sticky;top:0;z-index:101}
+.vbtn{flex:1;padding:10px;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;border:none;background:none;color:rgba(255,255,255,0.4);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+.vbtn.active{color:var(--taupe);border-bottom-color:var(--taupe)}
+.header{background:var(--forest);padding:14px 20px;position:sticky;top:42px;z-index:100}
+.hbrand{font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--taupe)}
+.hname{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--cream);line-height:1}
+.nav{display:flex;background:var(--white);border-bottom:1px solid var(--lgray);overflow-x:auto;scrollbar-width:none;position:sticky;top:110px;z-index:99}
+.nav::-webkit-scrollbar{display:none}
+.ntab{flex:0 0 auto;padding:11px 16px;font-size:12px;font-weight:500;color:var(--mgray);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:all 0.2s;background:none;border-left:none;border-right:none;border-top:none}
+.ntab.active{color:var(--forest);border-bottom-color:var(--taupe);font-weight:600}
+.content{flex:1;padding:16px 16px 100px;display:flex;flex-direction:column;gap:14px}
+.tab{display:none;flex-direction:column;gap:14px}
+.tab.active{display:flex}
+.card{background:var(--white);border-radius:var(--r);padding:18px;box-shadow:var(--sh)}
+.ctitle{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--forest);margin-bottom:2px}
+.csub{font-size:11px;color:var(--mgray);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:12px}
+.cnote{background:var(--forest);border-radius:var(--r);padding:16px;display:flex;gap:12px}
+.cav{width:34px;height:34px;border-radius:50%;background:var(--taupe);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:var(--forest);flex-shrink:0}
+.ctx{font-size:13px;color:var(--cream);line-height:1.6;font-style:italic}
+.cnm{font-size:11px;color:var(--olive);margin-top:5px;font-style:normal}
+.btn{width:100%;padding:14px;background:var(--forest);color:var(--cream);border:none;border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:12px;transition:all 0.2s}
+.btn:active{transform:scale(0.98)}
+.btn-taupe{background:var(--taupe);color:var(--forest)}
+.ebtns{display:flex;gap:6px;margin-top:8px}
+.ebtn{flex:1;padding:10px 4px;border-radius:var(--rs);border:1.5px solid var(--lgray);background:var(--cdark);font-size:20px;cursor:pointer;transition:all 0.2s;text-align:center}
+.ebtn.on{border-color:var(--taupe);transform:scale(1.08)}
+.cklist{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.cki{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--cdark);border-radius:var(--rs);cursor:pointer;border:1.5px solid transparent;transition:all 0.2s}
+.cki.on{background:var(--successl);border-color:var(--olive)}
+.ckd{width:22px;height:22px;border-radius:50%;border:2px solid var(--lgray);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:transparent;transition:all 0.2s}
+.cki.on .ckd{background:var(--olive);border-color:var(--olive);color:var(--white)}
+.ckl{font-size:13.5px;color:var(--black);flex:1;line-height:1.3}
+.cki.on .ckl{color:var(--success)}
+.stats{display:flex;gap:8px}
+.stat{flex:1;padding:12px 8px;background:var(--cdark);border-radius:var(--rs);text-align:center}
+.snum{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--forest)}
+.slbl{font-size:10px;color:var(--mgray);letter-spacing:0.5px;text-transform:uppercase}
+.daycard{border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.dayhead{padding:15px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.dc{background:var(--forest)}.dp{background:var(--slate)}.dpu{background:#4A4A4A}.dg{background:#5A3D2B}.dq{background:var(--plum)}
+.dnum{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:2px}
+.dname{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--cream)}
+.dfocus{font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px}
+.darr{color:rgba(255,255,255,0.5);font-size:16px;transition:transform 0.2s}
+.darr.open{transform:rotate(180deg)}
+.dbody{background:var(--white);display:none}
+.dbody.open{display:block}
+.dnote{padding:12px 18px;background:var(--cdark);font-size:12.5px;color:var(--dgray);line-height:1.5;font-style:italic;border-bottom:1px solid var(--lgray)}
+.exr{padding:12px 18px;border-bottom:1px solid var(--lgray)}
+.exr:last-child{border-bottom:none}
+.ext{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px}
+.exn{font-size:14px;font-weight:600;color:var(--black);flex:1;line-height:1.3}
+.exs{font-size:11px;color:var(--forest);font-weight:600;background:var(--cdark);padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.exc{font-size:12px;color:var(--dgray);line-height:1.5}
+.exlnk{font-size:11px;color:var(--taupe);background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;margin-top:4px;display:block}
+.finr{padding:12px 18px;background:var(--cdark)}
+.fint{font-size:13px;font-weight:600;color:var(--forest);margin-bottom:2px}
+.find{font-size:12px;color:var(--dgray);line-height:1.4}
+.tr{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--cdark);border-radius:var(--rs);margin-bottom:6px}
+.tl{font-size:13.5px;color:var(--black)}
+.tv{font-size:16px;font-weight:700;color:var(--forest)}
+.wb{padding:12px 14px;background:var(--warnl);border-radius:var(--rs);font-size:12.5px;color:var(--warn);line-height:1.5;margin-bottom:6px}
+.hr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--cdark);border-radius:var(--rs);cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;margin-bottom:6px}
+.hr.on{background:var(--successl);border-color:var(--olive)}
+.hl{display:flex;flex-direction:column;gap:2px}
+.hn{font-size:13.5px;font-weight:500;color:var(--black)}
+.hd{font-size:11.5px;color:var(--mgray)}
+.hr.on .hn{color:var(--success)}
+.hck{width:26px;height:26px;border-radius:50%;border:2px solid var(--lgray);display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all 0.2s;flex-shrink:0}
+.hr.on .hck{background:var(--olive);border-color:var(--olive);color:var(--white)}
+.mc{padding:13px 14px;background:var(--cdark);border-radius:var(--rs);margin-bottom:6px}
+.mn{font-size:13.5px;font-weight:600;color:var(--black);margin-bottom:2px}
+.mp{font-size:11px;color:var(--forest);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px}
+.md{font-size:12px;color:var(--dgray);line-height:1.4}
+.mtg{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;background:white;color:var(--mgray);margin-top:4px}
+.pb{width:100%;padding:12px 14px;background:var(--cdark);border:1.5px solid var(--lgray);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--dgray);cursor:pointer;text-align:left;transition:all 0.2s;margin-bottom:6px;display:block}
+.pb.on{border-color:var(--warn);background:var(--warnl);color:var(--warn);font-weight:600}
+.padv{padding:13px 14px;background:var(--warnl);border-radius:var(--rs);font-size:13px;color:var(--warn);line-height:1.6;display:none;margin-top:8px}
+.padv.show{display:block}
+.hgrid{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hbtn{flex:1;min-width:80px;padding:10px 8px;background:var(--cdark);border:1.5px solid var(--lgray);border-radius:var(--rs);font-size:12px;color:var(--dgray);cursor:pointer;text-align:center;transition:all 0.2s}
+.hbtn.on{background:var(--forest);border-color:var(--forest);color:var(--white)}
+.hadv{font-size:12.5px;color:var(--dgray);line-height:1.5;margin-top:10px;padding:12px 14px;background:var(--cdark);border-radius:var(--rs);display:none}
+.hadv.show{display:block}
+.ti{padding:14px;background:var(--cdark);border-radius:var(--rs);margin-bottom:8px}
+.tlbl{font-size:13.5px;font-weight:600;color:var(--black);margin-bottom:3px}
+.tsub{font-size:12px;color:var(--mgray);line-height:1.4;margin-bottom:10px}
+.optrow{display:flex;gap:6px;flex-wrap:wrap}
+.opt{padding:8px 14px;border-radius:20px;border:1.5px solid var(--lgray);background:var(--white);font-size:12px;color:var(--dgray);cursor:pointer;transition:all 0.2s}
+.opt.on{background:var(--forest);border-color:var(--forest);color:var(--white)}
+.mbr{padding:11px 14px;background:var(--cdark);border-radius:var(--rs);font-size:13px;color:var(--black);display:flex;justify-content:space-between;margin-bottom:5px}
+.mbt{font-size:12px;color:var(--mgray)}
+/* COACH VIEW */
+.snarea{width:100%;min-height:120px;padding:12px 14px;border:1.5px solid var(--lgray);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--black);background:var(--cdark);outline:none;resize:vertical;line-height:1.5}
+.snarea:focus{border-color:var(--taupe)}
+.loge{padding:14px;background:var(--cdark);border-radius:var(--rs);margin-bottom:8px;border-left:3px solid var(--taupe)}
+.loged{font-size:11px;color:var(--mgray);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px}
+.logt{font-size:13px;color:var(--black);line-height:1.5}
+.clrow{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--cdark);border-radius:var(--rs);margin-bottom:6px}
+.cll{font-size:13px;color:var(--black)}
+.clv{font-size:13px;font-weight:600;color:var(--forest)}
+.flag{padding:12px 14px;background:var(--warnl);border-radius:var(--rs);font-size:13px;color:var(--warn);line-height:1.4;margin-bottom:6px;border-left:3px solid var(--warn)}
+.prrow{display:flex;gap:8px;margin-bottom:8px}
+.prp{flex:1;padding:10px 8px;background:var(--cdark);border-radius:var(--rs);text-align:center}
+.prn{font-size:22px;font-weight:700;color:var(--forest);font-family:'Cormorant Garamond',serif}
+.prl{font-size:10px;color:var(--mgray);text-transform:uppercase;letter-spacing:0.5px}
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:500;align-items:flex-end}
+.overlay.open{display:flex}
+.modal{background:var(--white);border-radius:var(--r) var(--r) 0 0;padding:22px 18px 40px;width:100%;max-height:80vh;overflow-y:auto}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--forest);margin-bottom:14px}
+.si{width:100%;padding:12px 14px;border:1.5px solid var(--lgray);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;color:var(--black);background:var(--cdark);margin-bottom:14px}
+.si:focus{border-color:var(--taupe)}
+.sr{padding:13px 14px;background:var(--cdark);border-radius:var(--rs);margin-bottom:8px}
+.srm{font-size:10px;color:var(--taupe);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:3px}
+.srn{font-size:14px;font-weight:600;color:var(--forest);margin-bottom:4px}
+.srd{font-size:12.5px;color:var(--dgray);line-height:1.5}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--forest);color:var(--cream);padding:12px 24px;border-radius:30px;font-size:13px;font-weight:500;z-index:600;opacity:0;transition:opacity 0.3s;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Feminine Strength Co.">
+<meta name="theme-color" content="#1E3329">
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://mimaexschnbsdnfcluev.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pbWFleHNjaG5ic2RuZmNsdWV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1ODcyNTgsImV4cCI6MjA5NjE2MzI1OH0.Z6wnsi0u0lXJdrEuefJFmeaHCNROnSRs7z6EZclphrE";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ── CLOUD DATA LAYER ───────────────────────────────────────
+// The app keeps the existing local cache for offline resilience,
+// while syncing supported logs to Supabase when available.
+async function cloudUpsertLog(date, payload) {
+  try {
+    const { error } = await supabaseClient
+      .from('client_daily_logs')
+      .upsert({
+        client_key: 'frankie',
+        log_date: date,
+        payload: payload,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'client_key,log_date' });
+    if (error) throw error;
+    return true;
+  } catch (e) {
+    console.warn('Supabase sync unavailable:', e.message);
+    return false;
+  }
+}
+
+async function cloudSaveNote(text) {
+  try {
+    const { error } = await supabaseClient.from('coach_notes').insert({
+      client_key: 'frankie',
+      note_date: getTodayKey(),
+      note: text
+    });
+    if (error) throw error;
+    return true;
+  } catch (e) {
+    console.warn('Supabase note sync unavailable:', e.message);
+    return false;
+  }
+}
+
+async function cloudLoadLogs() {
+  try {
+    const { data, error } = await supabaseClient
+      .from('client_daily_logs')
+      .select('log_date,payload')
+      .eq('client_key','frankie')
+      .order('log_date', { ascending: false });
+    if (error) throw error;
+    return data || [];
+  } catch (e) {
+    console.warn('Supabase load unavailable:', e.message);
+    return [];
+  }
+}
+
+async function cloudLoadNotes() {
+  try {
+    const { data, error } = await supabaseClient
+      .from('coach_notes')
+      .select('note_date,note,created_at')
+      .eq('client_key','frankie')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return data || [];
+  } catch (e) {
+    console.warn('Supabase notes load unavailable:', e.message);
+    return [];
+  }
+}
+</script>
+
+
+<style>
+.inline-timer{margin-top:10px;padding:10px 12px;background:#f5f2ec;border-radius:12px;border:1px solid #e3ddd2}
+.inline-timer .itrow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.inline-timer .itname{font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:#657a6d}
+.inline-timer .itdisplay{font-size:25px;font-weight:700;min-width:72px;text-align:center;color:var(--forest)}
+.inline-timer .itbtns{display:flex;gap:6px;flex-wrap:wrap}
+.inline-timer button{border:1px solid #d7d0c5;background:white;border-radius:9px;padding:6px 9px;font-weight:700;font-size:11px}
+.inline-timer button.start{background:var(--forest);color:white;border-color:var(--forest)}
+.attachment-card{margin-top:10px;padding:14px;background:#fff;border:1px solid #e3ddd2;border-radius:14px}
+.attachment-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eee8df}
+.attachment-row:last-child{border-bottom:0}
+.attachment-meta{font-size:12px;color:var(--mgray)}
+</style>
+
+
+<style>
+.mbr{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.mbr>span:first-child{display:flex;flex-direction:column;gap:3px}
+.mbt{font-size:11px;color:var(--mgray);font-weight:400}
+.mbrtimer{display:flex!important;align-items:center;gap:6px;flex-shrink:0}
+.mbrtimer b{font-variant-numeric:tabular-nums;font-size:15px;color:var(--forest);min-width:42px;text-align:center}
+.mbrtimer button{border:0;background:var(--forest);color:white;border-radius:8px;padding:7px 10px;font-weight:700;font-size:11px}
+</style>
+
+</head>
+<body>
+
+<!-- VIEW TOGGLE -->
+<div class="view-toggle">
+  <button class="vbtn active" id="vb-client" onclick="sv('client')">Client</button>
+  <button class="vbtn" id="vb-coach" onclick="sv('coach')">Coach Hub</button>
+</div>
+
+<div class="header">
+  <div class="hbrand">Feminine Strength Co.</div>
+  <div class="hname" id="hname">Hey, Frankie</div>
+</div>
+
+<!-- CLIENT VIEW -->
+<div id="clientView">
+  <div class="nav">
+    <button class="ntab active" onclick="st('today',this)">Today</button>
+    <button class="ntab" onclick="st('training',this)">Training</button>
+    <button class="ntab" onclick="st('nutrition',this)">Nutrition</button>
+    <button class="ntab" onclick="st('cycle',this)">Cycle</button>
+    <button class="ntab" onclick="st('movement',this)">Movement</button>
+    <button class="ntab" onclick="st('cnotes',this)">Coach Notes</button>
+    <button class="ntab" onclick="st('timer',this)">⏱ Timer</button>
+    <button class="ntab" onclick="st('attachments',this)">📎 Attachments</button>
+  </div>
+  <div class="content">
+
+    <!-- TODAY -->
+    <div class="tab active" id="tab-today">
+
+<div class="card" id="clientProfileCard">
+  <div class="csub">Client Profile</div>
+  <div class="ctitle" id="profileName">Frankie</div>
+  <div style="height:6px"></div>
+  <div style="font-size:13px;color:var(--dgray);line-height:1.5" id="profileSummary">
+    Personalized coaching plan. Your training, nutrition, recovery and cycle guidance are adjusted to your individual needs.
+  </div>
+  <div class="hgrid" style="margin-top:12px">
+    <button class="hbtn on" onclick="showProfileLayer('standard')">Standard Framework</button>
+    <button class="hbtn" onclick="showProfileLayer('personal')">Personalized Layer</button>
+  </div>
+  <div class="hadv show" id="profileLayerText">
+    Your standard Feminine Strength Co. coaching structure: training, nutrition, mobility/recovery, cycle tracking, daily check-ins, progress and coach notes.
+  </div>
+</div>
+
+      <div class="cnote"><div class="cav">C</div><div><div class="ctx" id="dailyNote">Welcome back, Frankie. You took time to live your life — now let's get back to building the body you want. Start simple. Check in today.</div><div class="cnm">— Christin</div></div></div>
+      <div class="card">
+        <div class="csub">Daily Check-in</div>
+        <div class="ctitle" id="todayDate">Today</div>
+        <div style="height:12px"></div>
+        <div style="font-size:13px;color:var(--dgray);margin-bottom:6px">Energy today?</div>
+        <div class="ebtns">
+          <button class="ebtn" onclick="se(this,1)">😴</button>
+          <button class="ebtn" onclick="se(this,2)">😐</button>
+          <button class="ebtn" onclick="se(this,3)">🙂</button>
+          <button class="ebtn" onclick="se(this,4)">💪</button>
+          <button class="ebtn" onclick="se(this,5)">🔥</button>
+        </div>
+        <div class="cklist">
+          <div class="cki" onclick="ck(this,'meal1')"><div class="ckd">✓</div><div class="ckl">Meal 1 before coffee ☕</div></div>
+          <div class="cki" onclick="ck(this,'protein')"><div class="ckd">✓</div><div class="ckl">Protein with every meal 💪</div></div>
+          <div class="cki" onclick="ck(this,'water')"><div class="ckd">✓</div><div class="ckl">Electrolytes + water 💧</div></div>
+          <div class="cki" onclick="ck(this,'gluten')"><div class="ckd">✓</div><div class="ckl">Gluten free all day ✅</div></div>
+          <div class="cki" onclick="ck(this,'prepost')"><div class="ckd">✓</div><div class="ckl">Pre or post workout meal hit</div></div>
+          <div class="cki" onclick="ck(this,'moved')"><div class="ckd">✓</div><div class="ckl">Moved my body today 🏋️</div></div>
+        </div>
+        <button class="btn" onclick="saveToday()">Save Today</button>
+      </div>
+      <div class="card">
+        <div class="csub">This Month</div>
+        <div class="ctitle">Consistency</div>
+        <div style="height:10px"></div>
+        <div class="stats">
+          <div class="stat"><div class="snum" id="sDays">0</div><div class="slbl">Days logged</div></div>
+          <div class="stat"><div class="snum" id="sHabit">0%</div><div class="slbl">Habit score</div></div>
+          <div class="stat"><div class="snum" id="sWorkouts">0</div><div class="slbl">Workouts</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRAINING -->
+    <div class="tab" id="tab-training">
+      <div class="cnote"><div class="cav">C</div><div><div class="ctx">Welcome back phase. Week one we move well. Week two we add load. Week three we push. Your body remembers everything. Back definition is the goal this phase — we train for it directly.</div><div class="cnm">— Christin</div></div></div>
+      <div class="card"><div class="csub">Current Phase</div><div class="ctitle">Return to Building · Back Focus</div><div style="height:6px"></div><div style="font-size:13px;color:var(--dgray);line-height:1.5">6 weeks off means we rebuild the neural connection before we push load. You have two back sessions per week now — one with Christin on Thursdays, one solo on Mondays. Back definition requires frequency. This is how we get there.</div></div>
+
+      <div class="daycard">
+        <div class="dayhead dc" onclick="td('d1')"><div><div class="dnum">Thursday · With Christin</div><div class="dname">Coached Back Day</div><div class="dfocus">Barbell · Landmine · Dumbbells · Kettlebells · Cable Pulley</div></div><div class="darr" id="arr-d1">▼</div></div>
+        <div class="dbody" id="body-d1">
+          <div class="dnote">Your coached back session with Christin. Free weights and the landmine are the primary tools. The cable pulley is used where it adds value — no selectorized cable machines required.</div>
+          <div class="exr"><div class="ext"><div class="exn">Barbell Bent Over Row</div><div class="exs">4 × 8–10</div></div><div class="exc">Hinge at hips, keep your back flat, pull the bar toward the lower chest and drive elbows back. Control the lowering.</div><button class="exlnk" onclick="os('Barbell Row')">What does this look like? →</button></div>
+          <div class="exr"><div class="ext"><div class="exn">Landmine Row</div><div class="exs">3 × 10–12</div></div><div class="exc">Brace through the trunk and drive the elbow back toward the hip. Keep the shoulder packed and control the return.</div><button class="exlnk" onclick="os('Landmine Row')">What does this look like? →</button></div>
+          <div class="exr"><div class="ext"><div class="exn">Single Arm Dumbbell Row</div><div class="exs">3 × 10–12 each</div></div><div class="exc">Bench supported. Drive the elbow back rather than pulling with the hand. Hold 1 second at the top and keep the ribcage controlled.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Cable Pulley Lat Pulldown</div><div class="exs">3 × 10–12</div></div><div class="exc">Use the pulley setup. Pull toward the upper chest, keep ribs controlled and feel the lats doing the work.</div><button class="exlnk" onclick="os('Lat Pulldown')">What does this look like? →</button></div>
+          <div class="exr"><div class="ext"><div class="exn">Kettlebell Swing</div><div class="exs">3 × 12–15</div></div><div class="exc">Hinge, don't squat. Drive the hips forward and keep the reps crisp and controlled.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Cable Face Pull</div><div class="exs">3 × 15–20</div></div><div class="exc">Use the cable pulley with rope attachment if available. Pull toward the face with elbows high and wide. Control every rep.</div></div>
+          <div class="finr"><div class="fint">⏱ Timed Finish</div><div class="find">Use the built-in timer for programmed work/rest intervals. The goal is a strong session, not exhaustion.</div>
+<div class="inline-timer" data-inline-timer>
+  <div class="itrow">
+    <div>
+      <div class="itname">Rest / Interval Timer</div>
+      <div class="itbtns">
+        <button onclick="inlineSetTimer(this,30)">30s</button>
+        <button onclick="inlineSetTimer(this,40)">40s</button>
+        <button onclick="inlineSetTimer(this,60)">60s</button>
+        <button onclick="inlineSetTimer(this,90)">90s</button>
+      </div>
+    </div>
+    <div>
+      <div class="itdisplay">01:00</div>
+      <div class="itbtns">
+        <button class="start" onclick="inlineStartTimer(this)">Start</button>
+        <button onclick="inlineResetTimer(this)">Reset</button>
+      </div>
+    </div>
+  </div>
+</div></div>
+        </div>
+      </div>
+
+      <div class="daycard">
+        <div class="dayhead dp" onclick="td('d2')"><div><div class="dnum">Monday · Solo</div><div class="dname">Upper Body Pull</div><div class="dfocus">Back · Rear Delts · Biceps · Endurance</div></div><div class="darr" id="arr-d2">▼</div></div>
+        <div class="dbody" id="body-d2">
+          <div class="dnote">Your solo back day complements Thursday rather than repeating it. No lat pulldown here. This session is controlled back volume, rear-delt work, arms and a short rowing endurance finish.</div>
+          <div class="exr"><div class="ext"><div class="exn">Chest Supported DB Row</div><div class="exs">4 × 10–12</div></div><div class="exc">Lie face down on an incline bench so your chest is fully supported. Drive elbows back and up, hold 1 second, and control the lowering. Let your back do the work.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Straight Arm Pulldown</div><div class="exs">3 × 12–15</div></div><div class="exc">Use the cable pulley from a high position. Keep arms long with a soft elbow, pull the handle toward your thighs and squeeze the lower lats without turning it into a triceps movement.</div><button class="exlnk" onclick="os('Straight Arm Pulldown')">What does this look like? →</button></div>
+          <div class="exr"><div class="ext"><div class="exn">Cable Rear Delt Fly</div><div class="exs">3 × 12–15</div></div><div class="exc">Cables around shoulder height. Use a wide arc, keep a slight bend in the elbows and pull back without shrugging. Control the return.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Cable Face Pull</div><div class="exs">3 × 15–20</div></div><div class="exc">Use the pulley with the rope attachment. Pull toward the face with elbows high and wide. Smooth reps for shoulder health and rear-delt work.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">EZ-Bar Curl</div><div class="exs">3 × 10–12</div></div><div class="exc">Full range of motion. Keep elbows steady and control the lowering over 2 counts. No swinging.</div></div>
+          <div class="finr"><div class="fint">🚣 10-Minute Rower Finisher</div><div class="find">Alternate 1 minute easy/moderate with 1 minute steady for 5 rounds. Build endurance without turning the finish into an all-out conditioning session.</div>
+<div class="inline-timer" data-inline-timer>
+  <div class="itrow">
+    <div>
+      <div class="itname">Rest / Interval Timer</div>
+      <div class="itbtns">
+        <button onclick="inlineSetTimer(this,30)">30s</button>
+        <button onclick="inlineSetTimer(this,40)">40s</button>
+        <button onclick="inlineSetTimer(this,60)">60s</button>
+        <button onclick="inlineSetTimer(this,90)">90s</button>
+      </div>
+    </div>
+    <div>
+      <div class="itdisplay">01:00</div>
+      <div class="itbtns">
+        <button class="start" onclick="inlineStartTimer(this)">Start</button>
+        <button onclick="inlineResetTimer(this)">Reset</button>
+      </div>
+    </div>
+  </div>
+</div></div>
+        </div>
+      </div>
+
+      <div class="daycard">
+        <div class="dayhead dg" onclick="td('d3')"><div><div class="dnum">Tuesday · Solo</div><div class="dname">Lower Body — Glutes</div><div class="dfocus">Glutes · Hamstrings · Hip Stability</div></div><div class="darr" id="arr-d3">▼</div></div>
+        <div class="dbody" id="body-d3">
+          <div class="dnote">Glute day on your own. Different movements from your coached session so nothing overlaps. Feel your glutes on every single rep.</div>
+          <div class="exr"><div class="ext"><div class="exn">Glute Bridge (barbell)</div><div class="exs">4 × 12–15</div></div><div class="exc">Flat on floor. Drive through heels, squeeze hard at top, hold 2 seconds. Different mechanics from hip thrust. Add load as weeks progress.</div><button class="exlnk" onclick="os('Glute Bridge')">What does this look like? →</button></div>
+          <div class="exr"><div class="ext"><div class="exn">Romanian Deadlift (dumbbells)</div><div class="exs">3 × 10–12</div></div><div class="exc">Push hips back — not down. Feel the hamstring stretch at the bottom. Drive through heels to stand, squeeze glutes at top. Back flat throughout.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Cable Kickback (ankle strap)</div><div class="exs">3 × 15 each</div></div><div class="exc">Face the cable, hinge slightly, kick straight back squeezing glute hard at top. Hold 1 second. Feel glute — not lower back.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Single Leg Hamstring Curl</div><div class="exs">3 × 10–12 each</div></div><div class="exc">Each hamstring works independently. Control the lowering slowly over 3 counts — the eccentric builds the muscle.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Step Up (box or bench)</div><div class="exs">3 × 10 each</div></div><div class="exc">Drive through the heel of the elevated foot. Do not push off the floor foot. Control the step down slowly.</div></div>
+          <div class="finr"><div class="fint">🦵 Hip Stability Finisher</div><div class="find">Clamshell 15–20 each side · Hip flexor march 10 each leg. Non-negotiable. Directly addresses hip popping.</div>
+<div class="inline-timer" data-inline-timer>
+  <div class="itrow">
+    <div>
+      <div class="itname">Rest / Interval Timer</div>
+      <div class="itbtns">
+        <button onclick="inlineSetTimer(this,30)">30s</button>
+        <button onclick="inlineSetTimer(this,40)">40s</button>
+        <button onclick="inlineSetTimer(this,60)">60s</button>
+        <button onclick="inlineSetTimer(this,90)">90s</button>
+      </div>
+    </div>
+    <div>
+      <div class="itdisplay">01:00</div>
+      <div class="itbtns">
+        <button class="start" onclick="inlineStartTimer(this)">Start</button>
+        <button onclick="inlineResetTimer(this)">Reset</button>
+      </div>
+    </div>
+  </div>
+</div></div>
+        </div>
+      </div>
+
+      <div class="daycard">
+        <div class="dayhead dq" onclick="td('d4')"><div><div class="dnum">Saturday · Solo</div><div class="dname">Lower Body — Quads</div><div class="dfocus">Quads · Inner Thigh · No glute overlap</div></div><div class="darr" id="arr-d4">▼</div></div>
+        <div class="dbody" id="body-d4">
+          <div class="dnote">Quad day — not glute day. Can be done back to back with your glute session because the muscles are completely different. Feel your quads doing the work throughout.</div>
+          <div class="exr"><div class="ext"><div class="exn">Landmine Goblet Squat (heels elevated)</div><div class="exs">4 × 10–12</div></div><div class="exc">Heels on plates, hold end of landmine bar at chest. Squat straight down keeping chest tall. Pure quad focus.</div><button class="exlnk" onclick="os('Landmine Goblet Squat')">What does this look like? →</button></div>
+          <div class="exr"><div class="ext"><div class="exn">Leg Press (mid foot, quad focus)</div><div class="exs">4 × 10–12</div></div><div class="exc">Mid plate — not high and wide. That is glutes. Mid plate is quad focus. Control down slowly over 2 counts.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Walking Lunge (dumbbells)</div><div class="exs">3 × 12 each</div></div><div class="exc">Keep torso upright for quad focus. Forward lean shifts load to glutes. Step, lower, drive through front heel, step forward.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Barbell Spanish Squat</div><div class="exs">3 × 10–12</div></div><div class="exc">Bar at shin height on safety pins. Press calves into bar, squat with completely upright torso. Your quads do everything.</div><button class="exlnk" onclick="os('Spanish Squat')">What does this look like? →</button></div>
+          <div class="exr"><div class="ext"><div class="exn">Leg Extension + Cable Adduction</div><div class="exs">3 × each</div></div><div class="exc">Extension: extend fully, hold 1 second, lower over 3 counts. Adduction: ankle strap, pull leg across body, hold 1 second. Inner thigh isolation.</div></div>
+          <div class="finr"><div class="fint">🚶 Cardio Finish</div><div class="find">15–20 min incline treadmill walk. Quads done, glutes fresh. Fat burning without taxing recovery.</div>
+<div class="inline-timer" data-inline-timer>
+  <div class="itrow">
+    <div>
+      <div class="itname">Rest / Interval Timer</div>
+      <div class="itbtns">
+        <button onclick="inlineSetTimer(this,30)">30s</button>
+        <button onclick="inlineSetTimer(this,40)">40s</button>
+        <button onclick="inlineSetTimer(this,60)">60s</button>
+        <button onclick="inlineSetTimer(this,90)">90s</button>
+      </div>
+    </div>
+    <div>
+      <div class="itdisplay">01:00</div>
+      <div class="itbtns">
+        <button class="start" onclick="inlineStartTimer(this)">Start</button>
+        <button onclick="inlineResetTimer(this)">Reset</button>
+      </div>
+    </div>
+  </div>
+</div></div>
+        </div>
+      </div>
+
+      <div class="daycard">
+        <div class="dayhead dpu" onclick="td('d5')"><div><div class="dnum">Sunday · Solo</div><div class="dname">Upper Body Push</div><div class="dfocus">Chest · Shoulders · Triceps · Strong Arms</div></div><div class="darr" id="arr-d5">▼</div></div>
+        <div class="dbody" id="body-d5">
+          <div class="dnote">Push day — chest, shoulders, and triceps. Strong defined arms come from training them consistently. Everything here is different from your back days.</div>
+          <div class="exr"><div class="ext"><div class="exn">Incline DB Press + Cable Fly (superset)</div><div class="exs">3 × each</div></div><div class="exc">Incline: lower slowly over 2 counts, feel it across chest. Cable fly immediately after: wide arc, feel the stretch. Two chest angles back to back.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Arnold Press + Cable Lateral Raise (superset)</div><div class="exs">3 × each</div></div><div class="exc">Arnold: rotate palms as you press overhead. Cable lateral: raise to shoulder height, hold 1 second, do not shrug.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Tricep Dip + Overhead Extension (superset)</div><div class="exs">3 × each</div></div><div class="exc">Dips hit all three heads. Overhead extension stretches the long head. Most complete tricep stimulus available.</div></div>
+          <div class="exr"><div class="ext"><div class="exn">Weighted Dead Bug + Pallof Press</div><div class="exs">3 × each</div></div><div class="exc">Core finisher. Dead bug: lower back into floor. Pallof: press out and hold 2 seconds. Core stability is training.</div></div>
+          <div class="finr"><div class="fint">🚣 Cardio Finish</div><div class="find">10 min rowing machine. Chest done — rowing is mostly back and legs. Clean finish.</div>
+<div class="inline-timer" data-inline-timer>
+  <div class="itrow">
+    <div>
+      <div class="itname">Rest / Interval Timer</div>
+      <div class="itbtns">
+        <button onclick="inlineSetTimer(this,30)">30s</button>
+        <button onclick="inlineSetTimer(this,40)">40s</button>
+        <button onclick="inlineSetTimer(this,60)">60s</button>
+        <button onclick="inlineSetTimer(this,90)">90s</button>
+      </div>
+    </div>
+    <div>
+      <div class="itdisplay">01:00</div>
+      <div class="itbtns">
+        <button class="start" onclick="inlineStartTimer(this)">Start</button>
+        <button onclick="inlineResetTimer(this)">Reset</button>
+      </div>
+    </div>
+  </div>
+</div></div>
+        </div>
+      </div>
+
+      <button class="btn" onclick="os('')">🔍 Search Any Exercise</button>
+    </div>
+
+    <!-- NUTRITION -->
+    <div class="tab" id="tab-nutrition">
+      <div class="cnote"><div class="cav">C</div><div><div class="ctx">Back to basics after travel. Cleaner targets — 1,400 calories, 110–120g protein. Not restrictive, just focused. Check in daily. The habit score tells us where you actually are.</div><div class="cnm">— Christin</div></div></div>
+      <div class="card">
+        <div class="csub">Return Phase Targets</div><div class="ctitle">Nutrition Anchors</div>
+        <div style="height:10px"></div>
+        <div class="tr"><div class="tl">Daily calories</div><div class="tv">1,400</div></div>
+        <div class="tr"><div class="tl">Protein target</div><div class="tv">110–120g</div></div>
+        <div class="tr"><div class="tl">Per meal target</div><div class="tv">25–30g</div></div>
+        <div class="wb" style="margin-top:8px">☕ Coffee after Meal 1 only — never on an empty stomach. Caffeine suppresses hunger and you already eat small meals.</div>
+        <div style="padding:11px 14px;background:var(--cdark);border-radius:var(--rs);font-size:13px;color:var(--dgray);line-height:1.5">🚫 Never eat a carb alone — always pair with protein or fat. Banana needs nut butter. Rice needs chicken. Always.</div>
+      </div>
+      <div class="card">
+        <div class="csub">Today's Habits</div><div class="ctitle">How did you eat today?</div>
+        <div style="height:10px"></div>
+        <div class="hr" onclick="th(this)"><div class="hl"><div class="hn">Ate Meal 1 before coffee</div><div class="hd">Protein first — always</div></div><div class="hck">✓</div></div>
+        <div class="hr" onclick="th(this)"><div class="hl"><div class="hn">Lunch had 25g+ protein</div><div class="hd">Factor, Clean Plates, or home cooked</div></div><div class="hck">✓</div></div>
+        <div class="hr" onclick="th(this)"><div class="hl"><div class="hn">Pre-workout meal 90 min before</div><div class="hd">Protein + carb paired</div></div><div class="hck">✓</div></div>
+        <div class="hr" onclick="th(this)"><div class="hl"><div class="hn">Post-workout meal within 2 hrs</div><div class="hd">Most important window — do not skip</div></div><div class="hck">✓</div></div>
+        <div class="hr" onclick="th(this)"><div class="hl"><div class="hn">Bedtime protein snack</div><div class="hd">Cottage cheese, casein shake, Greek yogurt</div></div><div class="hck">✓</div></div>
+        <div class="hr" onclick="th(this)"><div class="hl"><div class="hn">No carbs eaten alone</div><div class="hd">Every carb paired with protein or fat</div></div><div class="hck">✓</div></div>
+        <button class="btn" onclick="saveNutrition()">Save Nutrition Check-in</button>
+      </div>
+      <div class="card">
+        <div class="csub">Meal Ideas</div><div class="ctitle">Gluten Free · High Protein</div>
+        <div style="height:10px"></div>
+        <div class="mc"><div class="mn">Greek Yogurt + Berries + Chia</div><div class="mp">~22–27g protein</div><div class="md">1 cup plain Greek yogurt, raspberries, 1 tbsp chia seeds. Zero prep. Great breakfast or bedtime snack.</div><span class="mtg">Breakfast · Bedtime</span></div>
+        <div class="mc"><div class="mn">Factor Meal + Greek Yogurt</div><div class="mp">~30–35g protein</div><div class="md">Choose Factor meals with 25g+ protein. Add Greek yogurt on the side. Zero cooking. Best lunch option.</div><span class="mtg">Lunch · Easy Day</span></div>
+        <div class="mc"><div class="mn">Chicken + Rice + Veg</div><div class="mp">~35–38g protein</div><div class="md">4oz grilled chicken, 1/2 cup white rice, any vegetable. Best post-workout meal in the program.</div><span class="mtg">Post-Workout · Dinner</span></div>
+        <div class="mc"><div class="mn">Ground Turkey Bowl</div><div class="mp">~32–35g protein</div><div class="md">4oz 93% lean turkey, 1/2 cup rice, avocado, salsa. Anti-inflammatory and filling. Easy to batch.</div><span class="mtg">Lunch · Dinner</span></div>
+        <div class="mc"><div class="mn">Cottage Cheese + Fruit</div><div class="mp">~27g protein</div><div class="md">High casein — slow-digesting overnight. Best bedtime snack for overnight muscle recovery.</div><span class="mtg">Bedtime</span></div>
+        <div class="mc"><div class="mn">Eggs + Sweet Potato</div><div class="mp">~25g protein</div><div class="md">2 whole eggs + 3 egg whites, medium roasted sweet potato. Good pre-workout breakfast.</div><span class="mtg">Breakfast · Pre-Workout</span></div>
+      </div>
+    </div>
+
+    <!-- CYCLE -->
+    <div class="tab" id="tab-cycle">
+      <div class="cnote"><div class="cav">C</div><div><div class="ctx">Track your cycle here so we can work with your body instead of against it. Scale fluctuations during your period are water — not fat. Always. Your Hashimoto's and your cycle are connected — log both.</div><div class="cnm">— Christin</div></div></div>
+      <div class="card">
+        <div class="csub">Cycle Tracking</div><div class="ctitle">Where are you today?</div>
+        <div style="height:10px"></div>
+        <button class="pb" onclick="sp(this,'menstrual')">🔴 Period (Days 1–5)</button>
+        <button class="pb" onclick="sp(this,'follicular')">🌱 Follicular (Days 6–13)</button>
+        <button class="pb" onclick="sp(this,'ovulation')">⚡ Ovulation (Days 14–16)</button>
+        <button class="pb" onclick="sp(this,'luteal')">🌙 Luteal (Days 17–28)</button>
+        <div class="padv" id="padv"></div>
+        <button class="btn" onclick="saveCycle()">Save Cycle Log</button>
+      </div>
+      <div class="card">
+        <div class="csub">During Your Period</div><div class="ctitle">What to do differently</div>
+        <div style="height:10px"></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="padding:12px 14px;background:var(--cdark);border-radius:var(--rs)"><div style="font-size:13px;font-weight:600;margin-bottom:3px">🍽️ Eat more</div><div style="font-size:12px;color:var(--dgray);line-height:1.5">Increase calories 150–250 on days 1–3. Your body needs more fuel. Add an extra snack. Do not restrict.</div></div>
+          <div style="padding:12px 14px;background:var(--cdark);border-radius:var(--rs)"><div style="font-size:13px;font-weight:600;margin-bottom:3px">⚖️ Ignore the scale</div><div style="font-size:12px;color:var(--dgray);line-height:1.5">Water retention adds 1–5 lbs during your cycle. Hormonal — not fat. The scale is lying.</div></div>
+          <div style="padding:12px 14px;background:var(--cdark);border-radius:var(--rs)"><div style="font-size:13px;font-weight:600;margin-bottom:3px">🏋️ Adjust training</div><div style="font-size:12px;color:var(--dgray);line-height:1.5">Days 1–2: reduce load 20–30%, keep the movement. Mobility day is always a yes.</div></div>
+          <div style="padding:12px 14px;background:var(--cdark);border-radius:var(--rs)"><div style="font-size:13px;font-weight:600;margin-bottom:3px">💊 Hashimoto's note</div><div style="font-size:12px;color:var(--dgray);line-height:1.5">Hormonal fluctuations can trigger flares. If fatigue is severe — mobility only, extra protein, extra rest.</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="csub">Hashimoto's Log</div><div class="ctitle">How is your thyroid today?</div>
+        <div style="height:10px"></div>
+        <div class="hgrid">
+          <button class="hbtn" onclick="sh(this,'great')">Feeling great</button>
+          <button class="hbtn" onclick="sh(this,'okay')">Okay</button>
+          <button class="hbtn" onclick="sh(this,'tired')">Fatigued</button>
+          <button class="hbtn" onclick="sh(this,'flare')">Flare day</button>
+        </div>
+        <div class="hadv" id="hadv"></div>
+        <button class="btn" onclick="saveHashi()">Save Log</button>
+      </div>
+    </div>
+
+    <!-- MOVEMENT -->
+    <div class="tab" id="tab-movement">
+      <div class="cnote"><div class="cav">C</div><div><div class="ctx">Hip stability and pelvic floor work matters as much as your heavy lifts. Track it here. Consistency on the small stuff is what makes the big stuff better.</div><div class="cnm">— Christin</div></div></div>
+      <div class="card">
+        <div class="csub">Hip Stability</div><div class="ctitle">Did you do your hip work?</div>
+        <div style="height:10px"></div>
+        <div class="ti"><div class="tlbl">Clamshell · 15–20 each side</div><div class="tsub">After every lower body session. Directly addresses the hip popping. Pelvis stays completely still.</div><div class="optrow"><button class="opt" onclick="so(this)">✓ Done</button><button class="opt" onclick="so(this)">Skipped</button></div></div>
+        <div class="ti"><div class="tlbl">Hip Flexor March · 10 each leg</div><div class="tsub">Drive knee up, hold 2 seconds. Strengthens the hip flexor that causes the snapping.</div><div class="optrow"><button class="opt" onclick="so(this)">✓ Done</button><button class="opt" onclick="so(this)">Skipped</button></div></div>
+        <div class="ti"><div class="tlbl">Hip Popping Today?</div><div class="tsub">Track so we can see the stability work reducing it over time.</div><div class="optrow"><button class="opt" onclick="so(this)">None 🎉</button><button class="opt" onclick="so(this)">A little</button><button class="opt" onclick="so(this)">Quite a bit</button></div></div>
+      </div>
+      <div class="card">
+        <div class="csub">Movement Quality</div><div class="ctitle">Pelvic Floor + Foot Mechanics</div>
+        <div style="height:10px"></div>
+        <div class="ti"><div class="tlbl">Heel connection during squats</div><div class="tsub">Were your heels staying down? Toes coming up = tight calves. Cue: push the floor away through your heels.</div><div class="optrow"><button class="opt" onclick="so(this)">Heels down ✓</button><button class="opt" onclick="so(this)">Sometimes up</button><button class="opt" onclick="so(this)">Toes coming up</button></div></div>
+        <div class="ti"><div class="tlbl">Pelvic floor awareness</div><div class="tsub">Any symptoms during exercise? No shame — just data for Christin.</div><div class="optrow"><button class="opt" onclick="so(this)">None</button><button class="opt" onclick="so(this)">Mild</button><button class="opt" onclick="so(this)">Notable</button></div></div>
+        <button class="btn" onclick="saveMovement()">Save Movement Log</button>
+      </div>
+      <div class="card">
+        <div class="csub">Recovery Day</div><div class="ctitle">Mobility Flow · 20–25 min</div>
+        <div style="height:8px"></div>
+        <div style="font-size:13px;color:var(--dgray);line-height:1.5;margin-bottom:12px">On flare days, period days, or any day your body says no. Always a yes.</div>
+        <div class="mbr"><span><strong>90/90 Hip Stretch</strong><small class="mbt">30 sec each side</small></span><span class="mbrtimer" data-move-timer="30"><b>00:30</b><button onclick="moveTimer(this)">Start</button></span></div>
+        <div class="mbr"><span><strong>Cat-Cow</strong><small class="mbt">30 sec · slow breaths</small></span><span class="mbrtimer" data-move-timer="30"><b>00:30</b><button onclick="moveTimer(this)">Start</button></span></div>
+        <div class="mbr"><span><strong>Thoracic Rotation</strong><small class="mbt">30 sec each side</small></span><span class="mbrtimer" data-move-timer="30"><b>00:30</b><button onclick="moveTimer(this)">Start</button></span></div>
+        <div class="mbr"><span><strong>Glute Bridge</strong><small class="mbt">30 sec · 3 sec holds</small></span><span class="mbrtimer" data-move-timer="30"><b>00:30</b><button onclick="moveTimer(this)">Start</button></span></div>
+        <div class="mbr"><span><strong>Pigeon Pose</strong><small class="mbt">30 sec each side</small></span><span class="mbrtimer" data-move-timer="30"><b>00:30</b><button onclick="moveTimer(this)">Start</button></span></div>
+        <div class="mbr"><span><strong>Box Breathing</strong><small class="mbt">5 minutes</small></span><span class="mbrtimer" data-move-timer="300"><b>05:00</b><button onclick="moveTimer(this)">Start</button></span></div>
+      </div>
+    </div>
+
+    <!-- COACH NOTES (client reads) -->
+    <div class="tab" id="tab-cnotes">
+      <div class="cnote"><div class="cav">C</div><div><div class="ctx">After every Thursday session I write notes here for you — what we worked on, what clicked, what to focus on before next time. Check back after each session.</div><div class="cnm">— Christin</div></div></div>
+      <div class="card">
+        <div class="csub">From Christin</div><div class="ctitle">Session Notes</div>
+        <div style="height:10px"></div>
+        <div id="clientNotesList"><div style="font-size:13px;color:var(--mgray);font-style:italic;padding:8px 0">No session notes yet. Check back after your first Thursday session.</div></div>
+      </div>
+    </div>
+
+
+
+    <div class="tab" id="tab-attachments">
+      <div class="cnote"><div class="cav">📎</div><div><div class="ctx">Your coaching files, forms, PDFs and other resources will live here.</div><div class="cnm">— Feminine Strength Co.</div></div></div>
+      <div class="card">
+        <div class="csub">Client Resources</div>
+        <div class="ctitle">Attachments</div>
+        <div class="attachment-card">
+          <div class="attachment-row">
+            <div><strong>Files coming soon</strong><div class="attachment-meta">This section is ready for PDFs, forms, videos and other client resources.</div></div>
+          </div>
+          <div style="font-size:12px;color:var(--mgray);line-height:1.5;margin-top:8px">
+            The next cloud-storage step will let you upload a file from the Coach Hub and have it appear here for Frankie.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab" id="tab-timer">
+      <div class="cnote"><div class="cav">⏱</div><div><div class="ctx">Use the timer for rest periods, finishers, intervals and timed mobility.</div><div class="cnm">— Feminine Strength Co.</div></div></div>
+      <div class="card">
+        <div class="csub">Workout Timer</div>
+        <div id="timerDisplay" style="font-size:56px;font-weight:700;letter-spacing:-2px;text-align:center;padding:18px 0;color:var(--forest)">01:00</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <button class="btn" onclick="setTimer(30)">30 sec</button>
+          <button class="btn" onclick="setTimer(45)">45 sec</button>
+          <button class="btn" onclick="setTimer(60)">60 sec</button>
+          <button class="btn" onclick="setTimer(90)">90 sec</button>
+          <button class="btn" onclick="setTimer(120)">2 min</button>
+          <button class="btn" onclick="setTimer(600)">10 min</button>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="btn" style="flex:1" onclick="startTimer()">Start</button>
+          <button class="btn" style="flex:1" onclick="pauseTimer()">Pause</button>
+          <button class="btn" style="flex:1" onclick="resetTimer()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /clientView -->
+
+<!-- COACH VIEW -->
+<div id="coachView" style="display:none">
+  <div class="nav">
+    <button class="ntab active" onclick="sct('session',this)">Session</button>
+    <button class="ntab" onclick="sct('clientlog',this)">Client Log</button>
+    <button class="ntab" onclick="sct('progress',this)">Progress</button>
+    <button class="ntab" onclick="sct('flags',this)">Flags</button>
+  </div>
+  <div class="content">
+
+    <div class="tab active" id="ctab-session">
+      <div class="card" style="background:var(--forest)">
+        <div class="csub" style="color:var(--olive)">Coach Dashboard</div>
+        <div class="ctitle" style="color:var(--cream)">Thursday Session Notes</div>
+        <div style="height:6px"></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5">Write your notes after each coached session. Frankie sees these immediately in her Coach Notes tab.</div>
+      </div>
+      <div class="card">
+        <div class="csub">New Session Note</div>
+        <div style="font-size:13px;color:var(--dgray);margin-bottom:10px">Date: <strong id="noteDate"></strong></div>
+        <textarea class="snarea" id="noteText" placeholder="What did you work on today? What clicked? What needs attention next week? Frankie will read this in her Coach Notes tab..."></textarea>
+        <button class="btn" onclick="saveNote()">Save Note for Frankie</button>
+      </div>
+      <div class="card">
+        <div class="csub">Previous Notes</div>
+        <div id="coachNotesList"><div style="font-size:13px;color:var(--mgray);font-style:italic">No notes yet.</div></div>
+      </div>
+    </div>
+
+    <div class="tab" id="ctab-clientlog">
+      <div class="card">
+        <div class="csub">What Frankie Logged Today</div><div class="ctitle">Client Check-in</div>
+        <div style="height:10px"></div>
+        <div id="clientLogView"><div style="font-size:13px;color:var(--mgray);font-style:italic">No check-in logged today yet.</div></div>
+      </div>
+      <div class="card">
+        <div class="csub">Nutrition Habits</div><div class="ctitle">Today's Food</div>
+        <div style="height:10px"></div>
+        <div id="nutritionLogView"><div style="font-size:13px;color:var(--mgray);font-style:italic">No nutrition log today yet.</div></div>
+      </div>
+      <div class="card">
+        <div class="csub">Movement + Hip Log</div><div class="ctitle">Movement Quality</div>
+        <div style="height:10px"></div>
+        <div id="movementLogView"><div style="font-size:13px;color:var(--mgray);font-style:italic">No movement log today yet.</div></div>
+      </div>
+      <div class="card">
+        <div class="csub">Cycle + Hashimoto's</div><div class="ctitle">Health Log</div>
+        <div style="height:10px"></div>
+        <div id="cycleLogView"><div style="font-size:13px;color:var(--mgray);font-style:italic">No cycle log today yet.</div></div>
+      </div>
+    </div>
+
+    <div class="tab" id="ctab-progress">
+      <div class="card">
+        <div class="csub">Overall Stats</div><div class="ctitle">Frankie's Progress</div>
+        <div style="height:10px"></div>
+        <div class="prrow">
+          <div class="prp"><div class="prn" id="pDays">0</div><div class="prl">Days logged</div></div>
+          <div class="prp"><div class="prn" id="pHabit">0%</div><div class="prl">Avg habits</div></div>
+        </div>
+        <div class="prrow">
+          <div class="prp"><div class="prn" id="pWorkouts">0</div><div class="prl">Workouts</div></div>
+          <div class="prp"><div class="prn" id="pFlares">0</div><div class="prl">Flare days</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="csub">Recent Check-ins</div><div class="ctitle">Last 7 Days</div>
+        <div style="height:10px"></div>
+        <div id="recentLogs"><div style="font-size:13px;color:var(--mgray);font-style:italic">No logs yet.</div></div>
+      </div>
+    </div>
+
+    <div class="tab" id="ctab-flags">
+      <div class="card">
+        <div class="csub">Coach Flags</div><div class="ctitle">Things to Address</div>
+        <div style="height:10px"></div>
+        <div id="flagsList">
+          <div class="flag">⚠ Return from travel — Week 1 ease in. Do not push load until movement quality confirmed.</div>
+          <div class="flag">⚠ Hip popping — monitor clamshell and hip flexor march compliance in movement logs.</div>
+          <div class="flag">⚠ Pelvic floor — track symptoms weekly. Note any increase during heavier lifts.</div>
+          <div class="flag">⚠ Nutrition — first phase back. Target 80%+ habit score by Week 3.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="csub">Add Flag</div>
+        <textarea class="snarea" id="flagText" placeholder="Add a coaching flag or reminder..." style="min-height:80px"></textarea>
+        <button class="btn" onclick="addFlag()">Add Flag</button>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /coachView -->
+
+<!-- SEARCH MODAL -->
+<div class="overlay" id="searchModal" onclick="cso(event)">
+  <div class="modal">
+    <div class="mtitle">Exercise Search</div>
+    <input class="si" id="si" type="text" placeholder="Search any exercise..." oninput="rs(this.value)" autocomplete="off">
+    <div id="sresults"></div>
+    <button class="btn" onclick="closeSearch()">Close</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────
+const exDB=[
+  {n:'Landmine Row',m:'Mid Back · Lats',d:'Set the bar in the landmine and row toward the hip or lower ribs. Keep the torso braced and drive the elbow back. Use the landmine angle for a strong, controlled pull.'},
+  {n:'Barbell Bent Over Row',m:'Mid Back · Thickness',d:'Hinge at hips, back flat, bar to lower chest. Drive elbows back and up. Squeeze shoulder blades together at the top. Foundation of back thickness and strength.'},
+  {n:'Single Arm Dumbbell Row',m:'Mid Back',d:'Bench supported. Drive elbow to ceiling — not your hand. Shoulder blade into back pocket. Hold 1 second at top. Feel mid-back doing the work.'},
+  {n:'Lat Pulldown',m:'Lats · Upper Back',d:'Pull to collarbone, lean back slightly. Feel sides of your back — not your arms. Wide grip = upper/outer lat. Reverse grip = lower lat + biceps.'},
+  {n:'Straight Arm Pulldown',m:'Lower Lats',d:'Arms stay straight, pull cable from overhead to thighs. Directly isolates the lower lat — visible back definition comes from here.'},
+  {n:'Cable Face Pull',m:'Rear Delts · Rotator Cuff',d:'Cable at face height, rope attachment. Pull rope to face, elbows high and wide, hold 1 second. Joint health — never skip this.'},
+  {n:'Seated Cable Row',m:'Mid Back',d:'Sit tall. Drive elbows back as far as they go. Hold 1 second at full contraction. Squeeze shoulder blades together.'},
+  {n:'Chest Supported DB Row',m:'Mid Back',d:'Lie face down on incline bench. Chest fully supported — lower back cannot help. Drive elbows back and up, hold 1 second. Honest back work.'},
+  {n:'Cable Rear Delt Fly',m:'Rear Delts',d:'Cables at shoulder height. Arms wide, slight bend in elbows. Pull back in wide arc, hold 1 second. Feel back of shoulders — not traps.'},
+  {n:'EZ Bar Curl',m:'Biceps',d:'Angled grip reduces wrist strain. Full range of motion, both arms. Control lowering over 2 counts. Builds peak bicep strength.'},
+  {n:'Glute Bridge',m:'Glutes',d:'Flat on floor. Feet hip-width. Drive through heels, squeeze hard at top, hold 2 seconds. Add barbell load over time.'},
+  {n:'Romanian Deadlift',m:'Hamstrings · Glutes',d:'Hinge at hips — not a squat. Push hips back, feel hamstring stretch at bottom. Drive through heels to stand, squeeze glutes at top. Back flat throughout.'},
+  {n:'Cable Kickback',m:'Glutes',d:'Ankle strap, face cable. Hinge slightly, kick straight back squeezing glute hard at top. Hold 1 second. Feel glute — not lower back.'},
+  {n:'Step Up',m:'Quads · Glutes',d:'Drive through heel of elevated foot to stand — do not push off floor foot. Control the step down slowly. Single leg glute and quad.'},
+  {n:'Landmine Goblet Squat',m:'Quads',d:'Anchor bar in landmine. Hold end at chest like a goblet. Heels elevated on plates. Squat straight down keeping chest tall. Pure quad focus.'},
+  {n:'Barbell Spanish Squat',m:'Quads',d:'Bar on safety pins at shin height. Press calves into bar, squat with completely upright torso. The bar is your anchor — quads do everything.'},
+  {n:'Leg Press',m:'Quads · Glutes',d:'Mid plate shoulder width = quad focus. High and wide = glute focus. Control down slowly. Do not lock knees at the top.'},
+  {n:'Walking Lunge',m:'Quads · Glutes',d:'Step forward, lower back knee, drive through front heel and step into next rep. Keep torso upright for quad focus.'},
+  {n:'Leg Extension',m:'Quads',d:'Extend fully, hold 1 second at top. Lower slowly over 3 counts. Direct quad isolation. Adjust machine so pad sits just above ankle.'},
+  {n:'Cable Adduction',m:'Inner Thigh',d:'Ankle strap at floor level. Stand sideways to cable, pull leg across body. Hold 1 second at full contraction. Inner thigh isolation.'},
+  {n:'Incline DB Chest Press',m:'Chest · Front Delts',d:'Bench at 30–45 degrees. Elbows at 45° from body. Lower slowly over 2 counts. Feel it across chest — not neck or shoulders.'},
+  {n:'Cable Chest Fly',m:'Chest',d:'Cables at chest height. Wide arc bringing hands together. Slight bend in elbows throughout. Feel the stretch at the widest point.'},
+  {n:'Arnold Press',m:'Shoulders',d:'Start with palms facing you, rotate as you press overhead. Reverse on the way down. Adds front delt involvement beyond standard shoulder press.'},
+  {n:'Cable Lateral Raise',m:'Side Delts',d:'Reach across body for handle from low pulley. Raise to shoulder height, hold 1 second, lower slowly. Cable keeps tension at bottom.'},
+  {n:'Tricep Dip',m:'Triceps',d:'Assisted machine. Body upright = tricep focus. Lower until elbows reach 90°. All three heads of the tricep. Reduce assistance over time.'},
+  {n:'Overhead Tricep Extension',m:'Triceps · Long Head',d:'Arms overhead, elbows pointing forward. Lower behind head, extend back up. Stretches the long head — the biggest part of the tricep.'},
+  {n:'Dead Bug',m:'Core',d:'Lie on back, arms up, knees at 90°. Lower back PRESSED INTO FLOOR. Extend opposite arm and leg. Exhale as you extend. Reduce range if lower back lifts.'},
+  {n:'Pallof Press',m:'Core · Anti-Rotation',d:'Cable at chest height. Stand sideways. Press straight out and hold 2 seconds. Core resists the cable pulling you sideways. Real functional stability.'},
+  {n:'Clamshell',m:'Hip External Rotators',d:'Lie on side, feet stacked. Rotate top knee open. Pelvis stays completely still — only your hip moves. Hold 1 second. Feel outer glute.'},
+  {n:'Hip Flexor March',m:'Hip Flexors',d:'Stand tall, drive knee up to hip height, hold 2 seconds, lower slowly. Directly strengthens the hip flexor that causes the snapping sensation.'},
+  {n:'Kettlebell Swing',m:'Glutes · Hamstrings',d:'HINGE not squat. Push hips back, hike KB between legs, snap hips forward. Squeeze glutes hard at top. Arms are just a pendulum.'},
+];
+
+// ── STATE ─────────────────────────────────────────────────
+let energy=null,checkins={},nutrHabits={},movData={},cyclePhase=null,hasPhase=null;
+
+
+// ── FEMININE STRENGTH CO. CLIENT PROFILE ──────────────────
+// Standard fields are reusable for every client.
+// The personalized layer is where individual needs are stored.
+const clientProfile = {
+  name: 'Frankie',
+  goals: ['Build strength', 'Back definition', 'Consistency'],
+  trainingFrequency: '5 days/week',
+  personalized: {
+    conditionOrConsideration: 'Hashimoto’s',
+    nutrition: ['Gluten-free', 'Protein-forward', 'Hydration + electrolytes'],
+    recovery: ['Monitor energy', 'Adjust training demand when fatigued', 'Prioritize recovery on flare days'],
+    cycle: true
+  }
+};
+
+function showProfileLayer(layer){
+  const buttons = document.querySelectorAll('#clientProfileCard .hbtn');
+  buttons.forEach(b => b.classList.remove('on'));
+  const text = document.getElementById('profileLayerText');
+  if(layer === 'personal'){
+    buttons[1].classList.add('on');
+    text.textContent =
+      'Frankie’s personalized layer: Hashimoto’s considerations, gluten-free nutrition, hydration/electrolytes, energy monitoring, and adjusting training demand based on how she is feeling.';
+  } else {
+    buttons[0].classList.add('on');
+    text.textContent =
+      'The reusable Feminine Strength Co. framework: training, nutrition, mobility/recovery, cycle tracking, daily check-ins, progress and coach notes.';
+  }
+}
+
+
+
+// ── INLINE EXERCISE TIMERS ─────────────────────────────────
+function inlineCard(btn){ return btn.closest('[data-inline-timer]'); }
+function inlineRender(card){
+  const remaining=Number(card.dataset.remaining||60);
+  const m=String(Math.floor(remaining/60)).padStart(2,'0');
+  const s=String(remaining%60).padStart(2,'0');
+  card.querySelector('.itdisplay').textContent=`${m}:${s}`;
+}
+function inlineSetTimer(btn,seconds){
+  const card=inlineCard(btn);
+  if(card._timer) clearInterval(card._timer);
+  card.dataset.duration=seconds;
+  card.dataset.remaining=seconds;
+  inlineRender(card);
+}
+function inlineStartTimer(btn){
+  const card=inlineCard(btn);
+  if(card._timer) return;
+  if(!card.dataset.remaining) card.dataset.remaining=card.dataset.duration||60;
+  card._timer=setInterval(()=>{
+    let r=Number(card.dataset.remaining)-1;
+    card.dataset.remaining=r;
+    inlineRender(card);
+    if(r<=0){
+      clearInterval(card._timer); card._timer=null;
+      card.dataset.remaining=card.dataset.duration||60;
+      inlineRender(card);
+      if(navigator.vibrate) navigator.vibrate([200,100,200]);
+      showToast('Timer complete');
+    }
+  },1000);
+}
+function inlineResetTimer(btn){
+  const card=inlineCard(btn);
+  if(card._timer) clearInterval(card._timer);
+  card._timer=null;
+  card.dataset.duration=card.dataset.duration||60;
+  card.dataset.remaining=card.dataset.duration;
+  inlineRender(card);
+}
+
+
+// ── MOVEMENT TIMERS ────────────────────────────────────────
+function moveTimer(btn){
+  const wrap=btn.closest('.mbrtimer');
+  if(wrap._timer){ clearInterval(wrap._timer); wrap._timer=null; btn.textContent='Start'; return; }
+  let remaining=Number(wrap.dataset.moveTimer||30);
+  btn.textContent='Pause';
+  const render=()=>{
+    const m=String(Math.floor(remaining/60)).padStart(2,'0');
+    const s=String(remaining%60).padStart(2,'0');
+    wrap.querySelector('b').textContent=`${m}:${s}`;
+  };
+  render();
+  wrap._timer=setInterval(()=>{
+    remaining--; render();
+    if(remaining<=0){
+      clearInterval(wrap._timer); wrap._timer=null;
+      btn.textContent='Start';
+      remaining=Number(wrap.dataset.moveTimer||30);
+      render();
+      if(navigator.vibrate) navigator.vibrate([200,100,200]);
+      showToast('Movement timer complete');
+    }
+  },1000);
+}
+
+// ── WORKOUT TIMER ──────────────────────────────────────────
+let timerSeconds=60, timerRemaining=60, timerInterval=null;
+function renderTimer(){
+  const m=String(Math.floor(timerRemaining/60)).padStart(2,'0');
+  const s=String(timerRemaining%60).padStart(2,'0');
+  const el=document.getElementById('timerDisplay'); if(el) el.textContent=`${m}:${s}`;
+}
+function setTimer(seconds){pauseTimer();timerSeconds=seconds;timerRemaining=seconds;renderTimer();}
+function startTimer(){
+  if(timerInterval) return;
+  timerInterval=setInterval(()=>{
+    timerRemaining--; renderTimer();
+    if(timerRemaining<=0){
+      pauseTimer(); timerRemaining=timerSeconds; renderTimer();
+      if(navigator.vibrate) navigator.vibrate([200,100,200]);
+      showToast('Timer complete');
+    }
+  },1000);
+}
+function pauseTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
+function resetTimer(){pauseTimer();timerRemaining=timerSeconds;renderTimer();}
+
+// ── INIT ─────────────────────────────────────────────────
+function init(){
+  const now=new Date();
+  document.getElementById('todayDate').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  document.getElementById('noteDate').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  setDailyNote();
+  loadStats();
+  loadNotes();
+}
+
+function setDailyNote(){
+  const notes=['Welcome back, Frankie. You took time to live your life — now let\'s get back to building the body you want. Start simple. Check in today.','Back in the building. Your body remembers everything — trust the process and let it come back.','One good day stacks on another. Show up today and let the rest follow.','Your back goals are waiting for you. Every session with Christin builds the definition you are after.','Protein first. Always. Coffee after. Everything else follows from there.','The consistency you built before travel is still in you. It comes back faster than it left.','This is the new chapter. Back stronger, more focused, better fed. Let\'s go.'];
+  document.getElementById('dailyNote').textContent=notes[new Date().getDay()];
+}
+
+// ── VIEW SWITCH ───────────────────────────────────────────
+function sv(v){
+  document.getElementById('clientView').style.display=v==='client'?'block':'none';
+  document.getElementById('coachView').style.display=v==='coach'?'block':'none';
+  document.getElementById('vb-client').classList.toggle('active',v==='client');
+  document.getElementById('vb-coach').classList.toggle('active',v==='coach');
+  document.getElementById('hname').textContent=v==='client'?'Hey, Frankie':'Coach Hub 📋';
+  if(v==='coach'){loadCoachData();}
+}
+
+// ── TABS ─────────────────────────────────────────────────
+function st(id,btn){
+  document.querySelectorAll('#clientView .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#clientView .ntab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function sct(id,btn){
+  document.querySelectorAll('#coachView .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#coachView .ntab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('ctab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── TRAINING ─────────────────────────────────────────────
+function td(id){const b=document.getElementById('body-'+id);const a=document.getElementById('arr-'+id);const o=b.classList.contains('open');b.classList.toggle('open',!o);a.classList.toggle('open',!o);}
+
+// ── TODAY ─────────────────────────────────────────────────
+function se(btn,val){document.querySelectorAll('.ebtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');energy=val;}
+function ck(el,key){el.classList.toggle('on');checkins[key]=el.classList.contains('on');updateScore();}
+function updateScore(){const done=Object.values(checkins).filter(Boolean).length;document.getElementById('sHabit').textContent=Math.round((done/6)*100)+'%';}
+
+function saveToday(){
+  const today=getTodayKey();
+  const data=getLogs();
+  data[today]=data[today]||{};
+  data[today].daily={energy,checkins,ts:Date.now()};
+  setLogs(data);
+  cloudUpsertLog(today, data[today]).then(ok => {
+    showToast(ok ? 'Saved to your coaching account ✓' : 'Saved on this device — cloud sync unavailable');
+  });
+  loadStats();
+}
+
+function saveNutrition(){
+  const today=getTodayKey();
+  const habits={};
+  document.querySelectorAll('#tab-nutrition .hr').forEach(r=>{habits[r.querySelector('.hn').textContent]=r.classList.contains('on');});
+  const data=getLogs();
+  data[today]=data[today]||{};
+  data[today].nutrition={habits,ts:Date.now()};
+  setLogs(data);
+  cloudUpsertLog(today, data[today]).then(ok => {
+    showToast(ok ? 'Nutrition saved ✓' : 'Saved on this device — cloud sync unavailable');
+  });
+}
+
+function saveMovement(){
+  const today=getTodayKey();
+  const data=getLogs();
+  data[today]=data[today]||{};
+  data[today].movement={data:movData,ts:Date.now()};
+  setLogs(data);
+  cloudUpsertLog(today, data[today]).then(ok => {
+    showToast(ok ? 'Movement log saved ✓' : 'Saved on this device — cloud sync unavailable');
+  });
+}
+
+// ── CYCLE ─────────────────────────────────────────────────
+const phAdv={menstrual:'🔴 Period days. Increase calories 150–250 today. Scale is up from water retention — ignore it completely. Reduce load if needed.',follicular:'🌱 Energy rising. Great time to push weights. Body recovers faster this phase.',ovulation:'⚡ Peak strength window. Great time for personal bests on main lifts.',luteal:'🌙 Energy may dip. Carb cravings are normal and hormonal — add a complex carb snack rather than fighting it.'};
+const hasAdv={great:'Great energy day. Train normally and push your working weights.',okay:'Okay day. Train normally but listen to your body. Reduce load if something feels off.',tired:'Fatigued day. Reduce volume 30% — keep the movement, reduce the demand. Mobility day is always an option.',flare:'Flare day. Mobility only today. Extra protein, extra rest, extra water. Smart not failure.'};
+
+function sp(btn,p){document.querySelectorAll('.pb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');cyclePhase=p;const el=document.getElementById('padv');el.textContent=phAdv[p];el.classList.add('show');}
+function sh(btn,s){document.querySelectorAll('.hbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');hasPhase=s;const el=document.getElementById('hadv');el.textContent=hasAdv[s];el.classList.add('show');}
+function so(btn){const r=btn.closest('.optrow');r.querySelectorAll('.opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');const k=btn.closest('.ti').querySelector('.tlbl').textContent;movData[k]=btn.textContent;}
+function th(el){el.classList.toggle('on');}
+
+function saveCycle(){
+  const today=getTodayKey();
+  const data=getLogs();
+  data[today]=data[today]||{};
+  data[today].cycle={phase:cyclePhase,hashi:hasPhase,ts:Date.now()};
+  setLogs(data);
+  cloudUpsertLog(today, data[today]).then(ok => {
+    showToast(ok ? 'Cycle log saved ✓' : 'Saved on this device — cloud sync unavailable');
+  });
+}
+function saveHashi(){saveCycle();showToast('Logged. Take care of yourself today 💙');}
+
+// ── STORAGE ───────────────────────────────────────────────
+function getTodayKey(){return new Date().toISOString().split('T')[0];}
+function getLogs(){try{return JSON.parse(localStorage.getItem('frankie_logs')||'{}');}catch{return {};}}
+function setLogs(d){localStorage.setItem('frankie_logs',JSON.stringify(d));}
+function getNotes(){try{return JSON.parse(localStorage.getItem('frankie_notes')||'[]');}catch{return [];}}
+function setNotes(n){localStorage.setItem('frankie_notes',JSON.stringify(n));}
+
+// ── STATS ─────────────────────────────────────────────────
+function loadStats(){
+  const data=getLogs();
+  const keys=Object.keys(data);
+  document.getElementById('sDays').textContent=keys.length;
+  const workouts=keys.filter(k=>data[k]?.daily?.checkins?.moved).length;
+  document.getElementById('sWorkouts').textContent=workouts;
+  const scores=keys.map(k=>{const c=data[k]?.daily?.checkins||{};return Object.values(c).filter(Boolean).length/6;});
+  const avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length*100):0;
+  document.getElementById('sHabit').textContent=avg+'%';
+}
+
+// ── COACH NOTES ───────────────────────────────────────────
+function saveNote(){
+  const text=document.getElementById('noteText').value.trim();
+  if(!text){showToast('Write something first');return;}
+  const notes=getNotes();
+  notes.unshift({date:getTodayKey(),note:text,ts:Date.now()});
+  setNotes(notes);
+  document.getElementById('noteText').value='';
+  cloudSaveNote(text).then(ok => {
+    showToast(ok ? 'Note saved to cloud ✓' : 'Note saved on this device — cloud sync unavailable');
+  });
+  loadNotes();
+}
+
+function loadNotes(){
+  const notes=getNotes();
+  const fmt=d=>new Date(d).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  const html=notes.length?notes.map(n=>`<div class="loge"><div class="loged">${fmt(n.date)}</div><div class="logt">${n.note}</div></div>`).join(''):'<div style="font-size:13px;color:var(--mgray);font-style:italic">No notes yet.</div>';
+  if(document.getElementById('coachNotesList'))document.getElementById('coachNotesList').innerHTML=html;
+  if(document.getElementById('clientNotesList'))document.getElementById('clientNotesList').innerHTML=notes.length?html:'<div style="font-size:13px;color:var(--mgray);font-style:italic;padding:8px 0">No session notes yet. Check back after your first Thursday session.</div>';
+}
+
+// ── COACH DATA VIEW ───────────────────────────────────────
+function loadCoachData(){
+  const today=getTodayKey();
+  const data=getLogs();
+  const td=data[today];
+  const fmt=d=>new Date(d).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  const emojiMap=['😴','😐','🙂','💪','🔥'];
+  const ckLabels={meal1:'Meal 1 before coffee',protein:'Protein with every meal',water:'Electrolytes + water',gluten:'Gluten free all day',prepost:'Pre/post workout meal',moved:'Moved body today'};
+
+  // Daily
+  if(td?.daily){
+    const c=td.daily.checkins||{};
+    document.getElementById('clientLogView').innerHTML=`
+      <div class="clrow"><div class="cll">Energy</div><div class="clv">${td.daily.energy?emojiMap[td.daily.energy-1]:'—'}</div></div>
+      ${Object.entries(ckLabels).map(([k,v])=>`<div class="clrow"><div class="cll">${v}</div><div class="clv" style="color:${c[k]?'var(--success)':'var(--warn)'}">${c[k]?'✓':'✗'}</div></div>`).join('')}`;
+  } else {document.getElementById('clientLogView').innerHTML='<div style="font-size:13px;color:var(--mgray);font-style:italic">No check-in today yet.</div>';}
+
+  // Nutrition
+  if(td?.nutrition){
+    document.getElementById('nutritionLogView').innerHTML=Object.entries(td.nutrition.habits||{}).map(([k,v])=>`<div class="clrow"><div class="cll">${k}</div><div class="clv" style="color:${v?'var(--success)':'var(--warn)'}">${v?'✓':'✗'}</div></div>`).join('');
+  } else {document.getElementById('nutritionLogView').innerHTML='<div style="font-size:13px;color:var(--mgray);font-style:italic">No nutrition log today yet.</div>';}
+
+  // Movement
+  if(td?.movement){
+    document.getElementById('movementLogView').innerHTML=Object.entries(td.movement.data||{}).map(([k,v])=>`<div class="clrow"><div class="cll">${k}</div><div class="clv">${v}</div></div>`).join('');
+  } else {document.getElementById('movementLogView').innerHTML='<div style="font-size:13px;color:var(--mgray);font-style:italic">No movement log today yet.</div>';}
+
+  // Cycle
+  if(td?.cycle){
+    document.getElementById('cycleLogView').innerHTML=`
+      <div class="clrow"><div class="cll">Cycle phase</div><div class="clv">${td.cycle.phase||'—'}</div></div>
+      <div class="clrow"><div class="cll">Hashimoto's</div><div class="clv">${td.cycle.hashi||'—'}</div></div>`;
+  } else {document.getElementById('cycleLogView').innerHTML='<div style="font-size:13px;color:var(--mgray);font-style:italic">No cycle log today yet.</div>';}
+
+  // Progress
+  const keys=Object.keys(data);
+  document.getElementById('pDays').textContent=keys.length;
+  document.getElementById('pWorkouts').textContent=keys.filter(k=>data[k]?.daily?.checkins?.moved).length;
+  const flares=keys.filter(k=>data[k]?.cycle?.hashi==='flare').length;
+  document.getElementById('pFlares').textContent=flares;
+  const scores=keys.map(k=>{const c=data[k]?.daily?.checkins||{};return Object.values(c).filter(Boolean).length/6;});
+  const avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length*100):0;
+  document.getElementById('pHabit').textContent=avg+'%';
+
+  // Recent 7
+  const recent=keys.sort().reverse().slice(0,7);
+  document.getElementById('recentLogs').innerHTML=recent.length?recent.map(k=>{
+    const d=data[k];const c=d?.daily?.checkins||{};const done=Object.values(c).filter(Boolean).length;const e=d?.daily?.energy;
+    return`<div class="clrow"><div class="cll">${fmt(k)}</div><div class="clv">${e?emojiMap[e-1]:'—'} · ${done}/6 habits</div></div>`;
+  }).join(''):'<div style="font-size:13px;color:var(--mgray);font-style:italic">No logs yet.</div>';
+}
+
+function addFlag(){
+  const text=document.getElementById('flagText').value.trim();
+  if(!text)return;
+  const div=document.createElement('div');div.className='flag';div.textContent='⚠ '+text;
+  document.getElementById('flagsList').appendChild(div);
+  document.getElementById('flagText').value='';
+  showToast('Flag added');
+}
+
+// ── SEARCH ────────────────────────────────────────────────
+function os(q){document.getElementById('searchModal').classList.add('open');document.getElementById('si').value=q;rs(q);setTimeout(()=>document.getElementById('si').focus(),100);}
+function closeSearch(){document.getElementById('searchModal').classList.remove('open');}
+function cso(e){if(e.target===document.getElementById('searchModal'))closeSearch();}
+function rs(q){const query=q.toLowerCase().trim();const results=query.length<1?exDB:exDB.filter(e=>e.n.toLowerCase().includes(query)||e.m.toLowerCase().includes(query)||e.d.toLowerCase().includes(query));document.getElementById('sresults').innerHTML=results.slice(0,8).map(e=>`<div class="sr"><div class="srm">${e.m}</div><div class="srn">${e.n}</div><div class="srd">${e.d}</div></div>`).join('')||'<div style="font-size:13px;color:var(--mgray);padding:8px 0">No results. Try a different term.</div>';}
+
+// ── TOAST ─────────────────────────────────────────────────
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+init();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {}));
+}
+</script>
+
+</body>
+</html>
