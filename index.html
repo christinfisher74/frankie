@@ -454,6 +454,15 @@ async function cloudLoadNotes() {
         <div class="mc"><div class="mn">Cottage Cheese + Fruit</div><div class="mp">~27g protein</div><div class="md">High casein — slow-digesting overnight. Best bedtime snack for overnight muscle recovery.</div><span class="mtg">Bedtime</span></div>
         <div class="mc"><div class="mn">Eggs + Sweet Potato</div><div class="mp">~25g protein</div><div class="md">2 whole eggs + 3 egg whites, medium roasted sweet potato. Good pre-workout breakfast.</div><span class="mtg">Breakfast · Pre-Workout</span></div>
       </div>
+      <div class="card" id="frankie-food-log">
+        <div class="csub">Food logging</div><div class="ctitle">What did you eat today?</div>
+        <p class="sub">A simple record of meals and snacks. No judgment, just information.</p>
+        <label for="foodBreakfast">Breakfast</label><input id="foodBreakfast" placeholder="What did you have?">
+        <label for="foodLunch" style="margin-top:10px">Lunch</label><input id="foodLunch" placeholder="What did you have?">
+        <label for="foodDinner" style="margin-top:10px">Dinner</label><input id="foodDinner" placeholder="What did you have?">
+        <label for="foodSnacks" style="margin-top:10px">Snacks</label><input id="foodSnacks" placeholder="What did you have?">
+        <button class="btn" style="margin-top:12px" onclick="saveFoodLog()">Save Food Log</button>
+      </div>
     </div>
 
     <!-- CYCLE -->
@@ -902,6 +911,7 @@ function init(){
   setDailyNote();
   loadStats();
   loadNotes();
+  loadFoodLog();
   decorateExercises();
 }
 
