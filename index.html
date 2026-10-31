@@ -1160,51 +1160,28 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <script>
-/* Exercise performance tracking + workout feedback. */
+/* Routine-level feedback only: one rating and note per workout day. */
 (function(){
-const $=id=>document.getElementById(id), day=()=>new Date().toISOString().slice(0,10);
-const read=()=>{try{return JSON.parse(localStorage.getItem('frankie_logs')||'{}')}catch{return {}}};
-const write=d=>localStorage.setItem('frankie_logs',JSON.stringify(d));
-function save(){
- const d=read(),k=day();d[k]=d[k]||{};
- const ratings={},exerciseLogs={};
- document.querySelectorAll('[data-fsc-ex-rating]').forEach(e=>{if(e.value)ratings[e.dataset.fscExRating]=Number(e.value)});
- document.querySelectorAll('[data-fsc-log]').forEach(row=>{
-  const name=row.dataset.fscLog, get=field=>row.querySelector('[data-field="'+field+'"]')?.value||'';
-  const entry={weight:get('weight'),reps:get('reps'),effort:get('effort'),completed:!!row.querySelector('[data-field="completed"]')?.checked};
-  if(entry.weight||entry.reps||entry.effort||entry.completed)exerciseLogs[name]=entry;
- });
- d[k].workoutFeedback={exerciseRatings:ratings,exerciseLogs,overallRating:$('fsc-overall-rating').value?Number($('fsc-overall-rating').value):null,note:$('fsc-workout-note').value,updatedAt:new Date().toISOString()};
- write(d);cloudUpsertLog(k,d[k]).then(ok=>$('fsc-feedback-status').textContent=ok?'Saved to Coach Hub ✓':'Saved on this device; cloud sync unavailable');
-}
-function build(){
- const tab=$('tab-training');if(!tab||$('fsc-feedback-card'))return;
- const card=document.createElement('section');card.className='card';card.id='fsc-feedback-card';
- card.innerHTML='<div class="csub">Workout tracking</div><div class="ctitle">Log today’s exercises</div><p style="font-size:12px;color:var(--mgray)">Enter the weight and reps you actually completed for each exercise. Mark each one complete when finished.</p><div id="fsc-ex-ratings"></div><label style="display:block;margin:12px 0 5px;font-size:12px">How did the workout feel overall? (1 = very easy · 10 = extremely hard)</label><select id="fsc-overall-rating" style="width:100%;padding:10px;border:1px solid var(--lgray);border-radius:8px"><option value="">Choose a rating</option>'+Array.from({length:10},(_,i)=>'<option value="'+(i+1)+'">'+(i+1)+'/10</option>').join('')+'</select><label style="display:block;margin:12px 0 5px;font-size:12px">Notes for Christin</label><textarea id="fsc-workout-note" style="width:100%;min-height:65px;padding:10px;border:1px solid var(--lgray);border-radius:8px" placeholder="Energy, discomfort, what felt strong…"></textarea><button id="fsc-save-feedback" class="btn">Save workout log</button><div id="fsc-feedback-status" style="font-size:11px;color:var(--mgray);margin-top:7px"></div>';
- tab.appendChild(card);
- const host=$('fsc-ex-ratings'),seen=new Set();
- document.querySelectorAll('#tab-training .exr').forEach((x,i)=>{
-  const name=x.querySelector('.exn')?.textContent.trim()||'Exercise '+(i+1);
-  if(seen.has(name))return;seen.add(name);
-  const safe=name.replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
-  const row=document.createElement('div');row.dataset.fscLog=name;row.style.cssText='padding:12px 0;border-bottom:1px solid var(--lgray)';
-  row.innerHTML='<strong style="font-size:13px">'+safe+'</strong><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:7px"><label style="font-size:10px">Weight<input data-field="weight" placeholder="e.g. 12 lb" style="display:block;width:100%;padding:7px;border:1px solid var(--lgray);border-radius:7px"></label><label style="font-size:10px">Reps<input data-field="reps" placeholder="e.g. 10, 10, 8" style="display:block;width:100%;padding:7px;border:1px solid var(--lgray);border-radius:7px"></label><label style="font-size:10px">Effort 1–10<input data-field="effort" type="number" min="1" max="10" placeholder="7" style="display:block;width:100%;padding:7px;border:1px solid var(--lgray);border-radius:7px"></label></div><label style="display:flex;gap:7px;align-items:center;font-size:11px;margin-top:7px"><input type="checkbox" data-field="completed"> Completed</label><label style="display:flex;gap:7px;align-items:center;font-size:11px;margin-top:7px">Exercise feel <select data-fsc-ex-rating="'+safe+'" style="padding:6px;border:1px solid var(--lgray);border-radius:7px"><option value="">Rate 1–10</option>'+Array.from({length:10},(_,j)=>'<option value="'+(j+1)+'">'+(j+1)+'/10</option>').join('')+'</select></label>';
-  host.appendChild(row);
- });
- $('fsc-save-feedback').onclick=save;
- const saved=read()[day()]?.workoutFeedback;
- if(saved){
-  $('fsc-overall-rating').value=saved.overallRating||'';$('fsc-workout-note').value=saved.note||'';
-  Object.entries(saved.exerciseLogs||{}).forEach(([n,v])=>{const row=[...document.querySelectorAll('[data-fsc-log]')].find(x=>x.dataset.fscLog===n);if(row){['weight','reps','effort'].forEach(k=>{const el=row.querySelector('[data-field="'+k+'"]');if(el)el.value=v[k]||''});row.querySelector('[data-field="completed"]').checked=!!v.completed}});
-  Object.entries(saved.exerciseRatings||{}).forEach(([n,v])=>{const el=[...document.querySelectorAll('[data-fsc-ex-rating]')].find(x=>x.dataset.fscExRating===n);if(el)el.value=v});
+ const $=id=>document.getElementById(id),day=()=>new Date().toISOString().slice(0,10);
+ const read=()=>{try{return JSON.parse(localStorage.getItem('frankie_logs')||'{}')}catch{return {}}};
+ function build(){
+  const tab=$('tab-training');if(!tab||$('fsc-feedback-card'))return;
+  const card=document.createElement('section');card.className='card';card.id='fsc-feedback-card';
+  card.innerHTML='<div class="csub">Routine check-in</div><div class="ctitle">How did this workout go?</div><label style="display:block;font-size:12px;margin:10px 0 5px">Which routine did you complete?</label><select id="fsc-routine" style="width:100%;padding:10px;border:1px solid var(--lgray);border-radius:8px"></select><label style="display:block;font-size:12px;margin:10px 0 5px">How did it feel?</label><select id="fsc-routine-rating" style="width:100%;padding:10px;border:1px solid var(--lgray);border-radius:8px"><option value="">Choose difficulty</option><option>Easy</option><option>Just right</option><option>Challenging</option><option>Too hard</option></select><label style="display:block;font-size:12px;margin:10px 0 5px">Notes for Christin</label><textarea id="fsc-routine-note" placeholder="What felt good? Anything sore, confusing, or a new personal best?" style="width:100%;min-height:75px;padding:10px;border:1px solid var(--lgray);border-radius:8px"></textarea><button id="fsc-save-routine" class="btn">Save routine feedback</button><div id="fsc-routine-status" style="font-size:11px;margin-top:7px"></div>';
+  tab.appendChild(card);
+  const opts=[...document.querySelectorAll('#tab-training .daycard')].map((el,i)=>{const h=el.querySelector('.dname')?.textContent.trim()||'Routine '+(i+1);const id=el.querySelector('.dbody')?.id||'routine-'+i;return {id,name:h}});
+  $('fsc-routine').innerHTML=opts.map(x=>'<option value="'+x.id+'">'+x.name.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'</option>').join('');
+  const saved=read()[day()]?.routineFeedback||{};
+  function restore(){const v=saved[$('fsc-routine').value]||{};$('fsc-routine-rating').value=v.rating||'';$('fsc-routine-note').value=v.note||''}
+  $('fsc-routine').onchange=restore;restore();
+  $('fsc-save-routine').onclick=()=>{
+   const d=read(),k=day();d[k]=d[k]||{};d[k].routineFeedback=d[k].routineFeedback||{};
+   d[k].routineFeedback[$('fsc-routine').value]={routineName:opts.find(x=>x.id===$('fsc-routine').value)?.name||'Workout',rating:$('fsc-routine-rating').value,note:$('fsc-routine-note').value,updatedAt:new Date().toISOString()};
+   localStorage.setItem('frankie_logs',JSON.stringify(d));
+   cloudUpsertLog(k,d[k]).then(ok=>$('fsc-routine-status').textContent=ok?'Saved to Coach Hub ✓':'Saved on this device; cloud sync unavailable');
+  };
  }
-}
-async function refresh(){
- try{const {data,error}=await supabaseClient.from('client_daily_logs').select('log_date,payload').eq('client_key','frankie').order('log_date',{ascending:false});if(error)throw error;
- const local=read();(data||[]).forEach(r=>{local[r.log_date]={...(r.payload||{}),...(local[r.log_date]||{})}});write(local);loadStats();loadCoachData();build();
- }catch(e){console.warn('Cloud refresh unavailable',e.message)}
-}
-build();refresh();
+ build();
 })();
 </script>
 </body>
