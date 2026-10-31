@@ -1149,5 +1149,42 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
+<script>
+/* Additive workout ratings; preserves existing access and data model. */
+(function(){
+const $=id=>document.getElementById(id), day=()=>new Date().toISOString().slice(0,10);
+const read=()=>{try{return JSON.parse(localStorage.getItem('frankie_logs')||'{}')}catch{return {}}};
+const write=d=>localStorage.setItem('frankie_logs',JSON.stringify(d));
+function save(){
+ const d=read(),k=day();d[k]=d[k]||{};const ratings={};
+ document.querySelectorAll('[data-fsc-ex-rating]').forEach(e=>{if(e.value)ratings[e.dataset.fscExRating]=Number(e.value)});
+ d[k].workoutFeedback={exerciseRatings:ratings,overallRating:$('fsc-overall-rating').value?Number($('fsc-overall-rating').value):null,note:$('fsc-workout-note').value,updatedAt:new Date().toISOString()};
+ write(d);cloudUpsertLog(k,d[k]).then(ok=>$('fsc-feedback-status').textContent=ok?'Saved to Coach Hub ✓':'Saved on this device; cloud sync unavailable');
+}
+function build(){
+ const tab=$('tab-training');if(!tab||$('fsc-feedback-card'))return;
+ const card=document.createElement('section');card.className='card';card.id='fsc-feedback-card';
+ card.innerHTML='<div class="csub">Workout feedback</div><div class="ctitle">Rate today’s training</div><div id="fsc-ex-ratings"></div><label style="display:block;margin:12px 0 5px;font-size:12px">Overall workout rating (1–10)</label><select id="fsc-overall-rating" style="width:100%;padding:10px;border:1px solid var(--lgray);border-radius:8px"><option value="">Choose a rating</option>'+Array.from({length:10},(_,i)=>'<option value="'+(i+1)+'">'+(i+1)+'/10</option>').join('')+'</select><label style="display:block;margin:12px 0 5px;font-size:12px">Notes for Christin</label><textarea id="fsc-workout-note" style="width:100%;min-height:65px;padding:10px;border:1px solid var(--lgray);border-radius:8px" placeholder="Energy, discomfort, what felt strong…"></textarea><button id="fsc-save-feedback" class="btn">Save workout feedback</button><div id="fsc-feedback-status" style="font-size:11px;color:var(--mgray);margin-top:7px"></div>';
+ tab.appendChild(card);
+ const host=$('fsc-ex-ratings');
+ document.querySelectorAll('#tab-training .exr').forEach((x,i)=>{
+  const name=x.querySelector('.exn')?.textContent.trim()||'Exercise '+(i+1),row=document.createElement('label');
+  row.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--lgray);font-size:12px';
+  const safe=name.replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+  row.innerHTML='<span>'+safe+'</span><select data-fsc-ex-rating="'+safe+'" style="padding:7px;border:1px solid var(--lgray);border-radius:8px"><option value="">Rate</option>'+Array.from({length:10},(_,j)=>'<option value="'+(j+1)+'">'+(j+1)+'/10</option>').join('')+'</select>';
+  host.appendChild(row);
+ });
+ $('fsc-save-feedback').onclick=save;
+ const saved=read()[day()]?.workoutFeedback;
+ if(saved){Object.entries(saved.exerciseRatings||{}).forEach(([n,v])=>{const el=[...document.querySelectorAll('[data-fsc-ex-rating]')].find(x=>x.dataset.fscExRating===n);if(el)el.value=v});$('fsc-overall-rating').value=saved.overallRating||'';$('fsc-workout-note').value=saved.note||''}
+}
+async function refresh(){
+ try{const {data,error}=await supabaseClient.from('client_daily_logs').select('log_date,payload').eq('client_key','frankie').order('log_date',{ascending:false});if(error)throw error;
+ const local=read();(data||[]).forEach(r=>{local[r.log_date]={...(r.payload||{}),...(local[r.log_date]||{})}});write(local);loadStats();loadCoachData();build();
+ }catch(e){console.warn('Cloud refresh unavailable',e.message)}
+}
+build();refresh();
+})();
+</script>
 </body>
 </html>
