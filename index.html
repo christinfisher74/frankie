@@ -302,6 +302,19 @@ async function cloudLoadNotes() {
 
     <!-- TODAY -->
     <div class="tab active" id="tab-today">
+<div class="card" id="monthlyGoalDashboard">
+        <div class="csub">YOUR MONTHLY GOAL · <span id="goalDashboardMonth"></span></div>
+        <div class="ctitle" id="goalDashboardTitle">What's your goal this month?</div>
+        <p id="goalDashboardWhy" style="font-size:13px;color:var(--dgray);line-height:1.5">Set a goal that matters to you. We'll keep it visible here so you can see what you're working toward.</p>
+        <div class="track-status" style="font-weight:700">HOW WILL YOU MEASURE YOUR PROGRESS?</div>
+        <div id="goalDashboardMeasure" style="font-size:13px;line-height:1.5;margin:5px 0 12px">Your progress measure will appear here.</div>
+        <label class="track-status" for="monthlyGoalProgressUpdate">How far have you come toward your goal?</label>
+        <textarea id="monthlyGoalProgressUpdate" rows="2" maxlength="700" placeholder="What progress have you made so far?" style="width:100%;padding:10px;margin:5px 0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text)"></textarea>
+        <button class="program-done" type="button" onclick="saveMonthlyGoalProgress()">Update My Progress</button>
+        <div id="goalProgressSaved" class="track-status"></div>
+        <p style="font-size:12px;line-height:1.5;color:var(--forest);font-weight:700;margin-bottom:0">Don't forget your monthly goal. Every workout is a step toward it. Some days will feel easier than others. Keep moving forward.</p>
+      </div>
+
 
 
 
@@ -338,18 +351,7 @@ async function cloudLoadNotes() {
           <div class="stat"><div class="snum" id="sWorkouts">0</div><div class="slbl">Workouts</div></div>
         </div>
       </div>
-      <div class="card" id="monthlyGoalDashboard">
-        <div class="csub">YOUR MONTHLY GOAL · <span id="goalDashboardMonth"></span></div>
-        <div class="ctitle" id="goalDashboardTitle">What's your goal this month?</div>
-        <p id="goalDashboardWhy" style="font-size:13px;color:var(--dgray);line-height:1.5">Set a goal that matters to you. We'll keep it visible here so you can see what you're working toward.</p>
-        <div class="track-status" style="font-weight:700">HOW WILL YOU MEASURE YOUR PROGRESS?</div>
-        <div id="goalDashboardMeasure" style="font-size:13px;line-height:1.5;margin:5px 0 12px">Your progress measure will appear here.</div>
-        <label class="track-status" for="monthlyGoalProgressUpdate">How far have you come toward your goal?</label>
-        <textarea id="monthlyGoalProgressUpdate" rows="2" maxlength="700" placeholder="What progress have you made so far?" style="width:100%;padding:10px;margin:5px 0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text)"></textarea>
-        <button class="program-done" type="button" onclick="saveMonthlyGoalProgress()">Update My Progress</button>
-        <div id="goalProgressSaved" class="track-status"></div>
-        <p style="font-size:12px;line-height:1.5;color:var(--forest);font-weight:700;margin-bottom:0">Don't forget your monthly goal. Every workout is a step toward it. Some days will feel easier than others. Keep moving forward.</p>
-      </div>
+      
 <div class="card" id="novProgressCard"><div class="csub">November progress tracker</div><div class="ctitle">Your work adds up</div><div class="stats"><div class="stat"><div class="snum" id="novDone">0/5</div><div class="slbl">Sessions logged</div></div><div class="stat"><div class="snum" id="novExercises">0</div><div class="slbl">Exercises completed</div></div><div class="stat"><div class="snum" id="novProgram">In progress</div><div class="slbl">Program status</div></div></div><p class="progress-note">Save the weight you use and mark each exercise as completed. When you finish a session, select Finish Workout. At the end of the month, select Finish November Program so we can review your progress and set your next target.</p><label for="programFinishDate" class="track-status">Date completed</label><input id="programFinishDate" type="date" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);margin:6px 0 10px"><button class="program-done" id="finishProgramBtn" onclick="finishNovemberProgram()">Finish November Program</button><div class="track-status" id="programStatus">Program is in progress.</div></div>
 <div class="card" id="frankieWeeklyCheckin">
 <div class="csub">WEEKLY CHECK-IN</div><div class="ctitle">Help me coach you well</div>
@@ -1055,9 +1057,10 @@ function setNotes(n){localStorage.setItem('frankie_notes',JSON.stringify(n));}
 // ── STATS ─────────────────────────────────────────────────
 function loadStats(){
   const data=getLogs();
-  const keys=Object.keys(data);
+  const monthKey=new Date().toISOString().slice(0,7);
+  const keys=Object.keys(data).filter(k=>k.startsWith(monthKey));
   document.getElementById('sDays').textContent=keys.length;
-  const workouts=keys.filter(k=>data[k]?.daily?.checkins?.moved).length;
+  const workouts=keys.filter(k=>data[k]?.daily?.checkins?.moved || data[k]?.workoutSession?.completed).length;
   document.getElementById('sWorkouts').textContent=workouts;
   const scores=keys.map(k=>{const c=data[k]?.daily?.checkins||{};return Object.values(c).filter(Boolean).length/6;});
   const avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length*100):0;
