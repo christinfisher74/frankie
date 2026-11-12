@@ -807,8 +807,20 @@ function saveWeight(key,value,el){
     if(saved) saved.textContent=ok?'Saved ✓':'Saved locally';
   });
 }
-function decorateExercises(){
-  const stored=weightStore()[getTodayKey()]||{};
+async function decorateExercises(){
+  const allStored=weightStore(),today=getTodayKey(),stored=allStored[today]||{};
+  let cloudRows=[];
+  try{cloudRows=await cloudLoadLogs();}catch(e){console.warn('Previous exercise weights unavailable:',e.message);}
+  function previousValue(key){
+    for(const row of cloudRows){
+      if(row.log_date===today)continue;
+      const value=row.payload?.trainingWeights?.[key];
+      if(value)return {value,date:row.log_date};
+    }
+    const dates=Object.keys(allStored).filter(d=>d<today).sort().reverse();
+    for(const day of dates){if(allStored[day]?.[key])return {value:allStored[day][key],date:day};}
+    return null;
+  }
   document.querySelectorAll('.exr').forEach(card=>{
     if(card.querySelector('.exercise-tools')) return;
     const nameEl=card.querySelector('.exn'); if(!nameEl) return;
@@ -821,9 +833,12 @@ function decorateExercises(){
       const key=day+'|'+part+'|'+j;
       const row=document.createElement('div'); row.className='weight-row'; row.style.marginTop=j?'7px':'0';
       const input=document.createElement('input'); input.type='text'; input.inputMode='decimal';
-      input.placeholder=parts.length>1?part+' · e.g. 20 lb':'e.g. 40 lb'; input.value=stored[key]||'';
+      const previous=previousValue(key);
+      input.placeholder=parts.length>1?part+' · e.g. 20 lb':'e.g. 40 lb';
+      input.value=stored[key]||previous?.value||'';
       const btn=document.createElement('button'); btn.type='button'; btn.textContent='Save';
       const status=document.createElement('span'); status.className='weight-saved';
+      if(previous){const hint=document.createElement('div');hint.className='track-status';hint.textContent='Last time ('+previous.date+'): '+previous.value;box.appendChild(hint);}
       btn.onclick=()=>saveWeight(key,input.value.trim(),btn);
       row.append(input,btn,status); box.appendChild(row);
     });
